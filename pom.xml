@@ -18,10 +18,10 @@
 
 	<modelVersion>4.0.0</modelVersion>
 	
-	<name>Starter Project</name>
-	<description>This is the Starter Project for the students of Design &amp; Testing.</description>
+	<name>Acme Endeavours</name>
+	<description>Acme Endeavours // December Eval - G25</description>
 
-	<artifactId>Starter-Project</artifactId>
+	<artifactId>Acme-Endeavours</artifactId>
 	<version>21.6</version>
 	<packaging>war</packaging>
 

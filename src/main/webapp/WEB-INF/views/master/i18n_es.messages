@@ -29,7 +29,7 @@ master.menu.sign-out = Salir
 # master.menu.anonymous #######################################################
 
 master.menu.anonymous = Anónimo
-master.menu.anonymous.favourite-link = Enlace favorito
+master.menu.consumer.jbn-favourite-link = Enlace favorito de Juan Buiza
 
 # master.menu.administrator ###################################################
 
