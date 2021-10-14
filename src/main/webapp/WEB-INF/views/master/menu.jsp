@@ -23,11 +23,21 @@
 		<%-- 			<acme:menu-suboption code="master.menu.anonymous.jbn-favourite-link" action="https://www.youtube.com/watch?v=i5cpPukfCZ0"/> --%>
 		<%-- 		</acme:menu-option> --%>
 
-		<acme:menu-option code="master.menu.anonymous" access="isAnonymous()">
+		<acme:menu-option code="master.menu.shout" access="isAnonymous()">
 			<acme:menu-suboption code="master.menu.anonymous.shout.create"
 				action="/anonymous/shout/create" />
 			<acme:menu-suboption code="master.menu.anonymous.shout.list"
 				action="/anonymous/shout/list" />
+		</acme:menu-option>
+		
+		<acme:menu-option code="master.menu.duty" access="isAnonymous()">
+			<acme:menu-suboption code="master.menu.anonymous.duty.list"
+				action="/anonymous/duty/list" />
+		</acme:menu-option>
+
+		<acme:menu-option code="master.menu.duty" access="isAuthenticated()">
+			<acme:menu-suboption code="master.menu.authenticated.duty.list"
+				action="/authenticated/duty/list" />
 		</acme:menu-option>
 
 		<acme:menu-option code="master.menu.administrator"

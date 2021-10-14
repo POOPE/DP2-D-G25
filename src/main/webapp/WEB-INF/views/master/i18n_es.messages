@@ -8,6 +8,13 @@
 # purposes.  The copyright owner does not offer any warranties or representations, nor do
 # they accept any liabilities with respect to them.
 
+
+# general
+
+master.menu.shout = Gritos
+master.menu.duty = Deberes
+
+
 # master.banner.welcome #######################################################
 
 master.banner.background = #FFE97F 
@@ -32,6 +39,7 @@ master.menu.anonymous = Anónimo
 master.menu.consumer.jbn-favourite-link = Enlace favorito de Juan Buiza
 master.menu.anonymous.shout.list = Ver gritos
 master.menu.anonymous.shout.create = Meter grito
+master.menu.anonymous.duty.list = Ver deberes
 
 # master.menu.administrator ###################################################
 

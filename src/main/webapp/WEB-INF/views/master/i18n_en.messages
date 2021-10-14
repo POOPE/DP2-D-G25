@@ -8,6 +8,12 @@
 # purposes.  The copyright owner does not offer any warranties or representations, nor do
 # they accept any liabilities with respect to them.
 
+
+# general
+
+master.menu.shout = Shouts
+master.menu.duty = Duties
+
 # master.banner.welcome #######################################################
 
 master.banner.background = #FFE97F 
@@ -32,6 +38,7 @@ master.menu.anonymous = Anonymous
 master.menu.anonymous.favourite-link = Favourite link
 master.menu.anonymous.shout.list = View shouts
 master.menu.anonymous.shout.create = Shout!
+master.menu.anonymous.duty.list = View duties
 
 # master.menu.administrator ###################################################
 

@@ -18,6 +18,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.format.FormatterRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
+import acme.components.converters.BasicDurationFormatter;
 import acme.components.converters.LocalDateFormatter;
 import acme.components.converters.LocalDateTimeFormatter;
 import acme.framework.utilities.LocalisedDateFormatter;
@@ -36,6 +37,7 @@ public class ConversionConfiguration implements WebMvcConfigurer {
 		LocalisedDoubleFormatter doubleFormatter;
 		LocalDateFormatter localDateConverter;
 		LocalDateTimeFormatter localDateTimeConverter;
+		BasicDurationFormatter basicDurationFormatter;
 
 		registry.removeConvertible(String.class, Date.class);
 		registry.removeConvertible(Date.class, String.class);
@@ -54,6 +56,8 @@ public class ConversionConfiguration implements WebMvcConfigurer {
 		registry.addFormatter(localDateConverter);
 		localDateTimeConverter = new LocalDateTimeFormatter();
 		registry.addFormatter(localDateTimeConverter);
+		basicDurationFormatter = new BasicDurationFormatter();
+		registry.addFormatter(basicDurationFormatter);
 	}
 
 }
