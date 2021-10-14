@@ -23,6 +23,9 @@
 			<list>
 				<bean class="acme.framework.utilities.LocalisedDateFormatter"/>
 				<bean class="acme.framework.utilities.LocalisedMoneyFormatter"/>
+				<bean class="acme.components.converters.LocalDateTimeFormatter"/>
+				<bean class="acme.components.converters.LocalDateFormatter"/>
+				<bean class="acme.components.converters.BasicDurationFormatter"/>
 			</list>
 		</property>
 	</bean>

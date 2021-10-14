@@ -20,11 +20,11 @@
 	<!-- shout -->
 	<acme:form-hidden path="moment" />
 	<acme:form-textbox code="anonymous.shout.form.label.author"
-		placeholder="Author" path="author" />
+		 path="author" />
 	<acme:form-textarea code="anonymous.shout.form.label.text"
-		placeholder="Description" path="text" />
-	<acme:form-textbox code="anonymous.shout.form.label.info"
-		placeholder="https://yourlink.com" path="info" />
+		 path="text" />
+	<acme:form-textbox code="anonymous.shout.form.label.link"
+		placeholder="https://qwerty.com" path="link" />
 	<acme:form-submit test="${command == 'create'}"
 		code="anonymous.shout.form.button.create"
 		action="/anonymous/shout/create" />

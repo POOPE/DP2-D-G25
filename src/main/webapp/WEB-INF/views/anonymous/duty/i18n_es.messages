@@ -8,12 +8,13 @@
 # purposes.  The copyright owner does not offer any warranties or representations, nor do
 # they accept any liabilities with respect to them.
 
-anonymous.duty.form.label.author = Autor:
-anonymous.duty.form.label.text = Texto:
-anonymous.duty.form.label.text = Información:
-anonymous.duty.form.button.create = Gritar
-anonymous.duty.form.button.return = Volver
-anonymous.duty.form.error.spamDetected = No se puede crear grito con spam
+anonymous.duty.form.label.title = Titulo
+anonymous.duty.form.label.description = Descripcion 
+anonymous.duty.form.label.executionstart = Inicio
+anonymous.duty.form.label.executionend = Fin
+anonymous.duty.form.label.workload = Carga
+anonymous.duty.form.label.link =  Link
+anonymous.duty.form.button.return = Return
  
 anonymous.duty.list.label.title = Titulo
 anonymous.duty.list.label.description = Descripcion 

@@ -8,7 +8,6 @@ import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
-import javax.validation.constraints.Future;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
@@ -34,7 +33,6 @@ public class Duty extends DomainEntity {
 	private String				title;
 	@NotBlank
 	private String				description;
-	@Future
 	@NotNull
 	private LocalDateTime		executionStart;
 	@NotNull
@@ -64,10 +62,27 @@ public class Duty extends DomainEntity {
 			public Predicate toPredicate(final Root<Duty> root, final CriteriaQuery<?> query, final CriteriaBuilder criteriaBuilder) {
 				final LocalDateTime reference = LocalDateTime.now();
 				if (!isExecutionOver) {
-					return criteriaBuilder.lessThan(root.get("executionEnd"), reference);
+					return criteriaBuilder.greaterThan(root.get("executionEnd"), reference);
 				} else {
-					return criteriaBuilder.greaterThanOrEqualTo(root.get("executionEnd"), reference);
+					return criteriaBuilder.lessThanOrEqualTo(root.get("executionEnd"), reference);
 				}
+			}
+
+		};
+	}
+	
+	public static Specification<Duty> withId(final Integer id) {
+		return new Specification<Duty>() {
+
+
+			/**
+			 * 
+			 */
+			private static final long serialVersionUID = -1588747159144666818L;
+
+			@Override
+			public Predicate toPredicate(final Root<Duty> root, final CriteriaQuery<?> query, final CriteriaBuilder criteriaBuilder) {
+				return criteriaBuilder.equal(root.get("id"), id);
 			}
 
 		};

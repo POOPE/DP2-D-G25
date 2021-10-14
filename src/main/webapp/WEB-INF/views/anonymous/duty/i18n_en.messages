@@ -8,10 +8,15 @@
 # purposes.  The copyright owner does not offer any warranties or representations, nor do
 # they accept any liabilities with respect to them.
 
-anonymous.duty.form.label.author = Author:
-anonymous.duty.form.label.text = Text:
-anonymous.duty.form.label.info = Info:
+anonymous.duty.form.label.title = Title
+anonymous.duty.form.label.description = Description 
+anonymous.duty.form.label.executionstart = Start
+anonymous.duty.form.label.executionend = End
+anonymous.duty.form.label.workload = Workload
+anonymous.duty.form.label.link =  Link
 anonymous.duty.form.button.return = Return
+
+
 
 anonymous.duty.list.label.title = Title
 anonymous.duty.list.label.description = Description 

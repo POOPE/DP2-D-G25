@@ -19,9 +19,9 @@
 	<acme:list-column code="anonymous.shout.list.label.moment"
 		path="moment"  width="15%" />
 	<acme:list-column code="anonymous.shout.list.label.author"
-		path="author"  />
+		path="author" sortable="false" />
 	<acme:list-column code="anonymous.shout.list.label.text" path="text"
-		width="40%" />
+		width="40%" sortable="false"/>
 	<acme:list-column code="anonymous.shout.list.label.info" path="link"
-		width="20%"/>
+		width="20%" sortable="false"/>
 </acme:list>

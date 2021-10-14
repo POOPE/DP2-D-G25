@@ -32,15 +32,15 @@ public class AnonymousDutyController extends AbstractController<Anonymous, Duty>
 	@Autowired
 	protected AnonymousDutyListService	listService;
 	
-//	@Autowired
-//	protected AnonymousDutyCreateService	createService;
+	@Autowired
+	protected AnonymousDutyShowService	showService;
 
 	// Constructors -----------------------------------------------------------
 
 	@PostConstruct
 	protected void initialise() {
 		super.addBasicCommand(BasicCommand.LIST, this.listService);
-//		super.addBasicCommand(BasicCommand.SHOW, this.createService);
+		super.addBasicCommand(BasicCommand.SHOW, this.showService);
 	}
 
 }

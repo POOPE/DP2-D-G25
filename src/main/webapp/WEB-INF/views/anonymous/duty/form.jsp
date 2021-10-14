@@ -18,15 +18,16 @@
 
 <acme:form>
 	<!-- shout -->
-	<acme:form-hidden path="moment" />
-	<acme:form-textbox code="anonymous.shout.form.label.author"
-		placeholder="Author" path="author" />
-	<acme:form-textarea code="anonymous.shout.form.label.text"
-		placeholder="Description" path="text" />
-	<acme:form-textbox code="anonymous.shout.form.label.info"
-		placeholder="https://yourlink.com" path="info" />
-	<acme:form-submit test="${command == 'create'}"
-		code="anonymous.shout.form.button.create"
-		action="/anonymous/shout/create" />
-	<acme:form-return code="anonymous.shout.form.button.return" />
+	<acme:form-textbox code="anonymous.duty.form.label.title" path="title" />
+	<acme:form-textbox code="anonymous.duty.form.label.description" path="description" />
+	
+	<acme:form-textbox code="anonymous.duty.form.label.executionstart" path="executionStart" />
+	<acme:form-textbox code="anonymous.duty.form.label.executionend" path="executionEnd" />
+	
+	<acme:form-textbox code="anonymous.duty.form.label.workload" path="workload" />
+	
+	<acme:form-textbox code="anonymous.duty.form.label.link" path="link" />
+	
+	
+	<acme:form-return code="anonymous.duty.form.button.return" />
 </acme:form>
