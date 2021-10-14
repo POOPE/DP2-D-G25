@@ -34,11 +34,12 @@
 			<acme:menu-suboption code="master.menu.anonymous.duty.list"
 				action="/anonymous/duty/list" />
 		</acme:menu-option>
-
+		
 		<acme:menu-option code="master.menu.duty" access="isAuthenticated()">
-			<acme:menu-suboption code="master.menu.authenticated.duty.list"
+			<acme:menu-suboption code="master.menu.anonymous.duty.list"
 				action="/authenticated/duty/list" />
 		</acme:menu-option>
+
 
 		<acme:menu-option code="master.menu.administrator"
 			access="hasRole('Administrator')">
