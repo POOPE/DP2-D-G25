@@ -25,5 +25,8 @@
 		placeholder="Description" path="text" />
 	<acme:form-textbox code="anonymous.shout.form.label.info"
 		placeholder="https://yourlink.com" path="info" />
-
+	<acme:form-submit test="${command == 'create'}"
+		code="anonymous.shout.form.button.create"
+		action="/anonymous/shout/create" />
+	<acme:form-return code="anonymous.shout.form.button.return" />
 </acme:form>

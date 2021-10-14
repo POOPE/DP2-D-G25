@@ -22,6 +22,6 @@
 		path="author"  />
 	<acme:list-column code="anonymous.shout.list.label.text" path="text"
 		width="40%" />
-	<acme:list-column code="anonymous.shout.list.label.info" path="info"
+	<acme:list-column code="anonymous.shout.list.label.info" path="link"
 		width="20%"/>
 </acme:list>

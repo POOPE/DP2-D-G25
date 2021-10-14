@@ -1,15 +1,19 @@
 package acme.entities.shouts;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 
 import javax.persistence.Entity;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Predicate;
+import javax.persistence.criteria.Root;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Past;
 
 import org.hibernate.validator.constraints.Length;
+import org.hibernate.validator.constraints.URL;
+import org.springframework.data.jpa.domain.Specification;
 
 import acme.framework.entities.DomainEntity;
 import lombok.Getter;
@@ -27,22 +31,44 @@ public class Shout extends DomainEntity {
 
 	// Attributes -------------------------------------------------------------
 
-	@Temporal(TemporalType.TIMESTAMP)
+
 	@NotNull
 	@Past
-	protected Date				moment;
+	private LocalDateTime				moment;
 
 	@NotBlank
 	@Length(min = 5, max = 25)
-	protected String			author;
+	private String			author;
 
 	@NotBlank
 	@Length(max = 100)
-	protected String			text;
+	private String			text;
+	
+	@URL
+	private String link;
 
 
 	// Derived attributes -----------------------------------------------------
 
 	// Relationships ----------------------------------------------------------
+	
+	// Specifications
+	
+	public static Specification<Shout> isFromLastMonth(){
+		return new Specification<Shout>() {
+
+			/**
+			 * 
+			 */
+			private static final long serialVersionUID = -801717304557338995L;
+
+			@Override
+			public Predicate toPredicate(final Root<Shout> root, final CriteriaQuery<?> query, final CriteriaBuilder criteriaBuilder) {
+				final LocalDateTime reference = LocalDateTime.now().minusMonths(1);
+				return criteriaBuilder.greaterThanOrEqualTo(root.get("moment"), reference);
+			}
+			
+		};
+	}
 
 }

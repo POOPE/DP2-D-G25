@@ -30,6 +30,8 @@ master.menu.sign-out = Salir
 
 master.menu.anonymous = Anónimo
 master.menu.consumer.jbn-favourite-link = Enlace favorito de Juan Buiza
+master.menu.anonymous.shout.list = Ver gritos
+master.menu.anonymous.shout.create = Meter grito
 
 # master.menu.administrator ###################################################
 
