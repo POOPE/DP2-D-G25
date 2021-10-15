@@ -71,4 +71,5 @@ public class Shout extends DomainEntity {
 		};
 	}
 
+
 }
