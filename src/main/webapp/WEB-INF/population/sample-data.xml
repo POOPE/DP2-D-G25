@@ -1,22 +1,93 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<!--
-- sample-data.xml
--
-- Copyright (C) 2012-2021 Rafael Corchuelo.
--
-- In keeping with the traditional purpose of furthering education and research, it is
-- the policy of the copyright owner to permit non-commercial use and redistribution of
-- this software. It has been tested carefully, but it is not guaranteed for any particular
-- purposes.  The copyright owner does not offer any warranties or representations, nor do
-- they accept any liabilities with respect to them.
--->
+<!-- - sample-data.xml - - Copyright (C) 2012-2021 Rafael Corchuelo. - - 
+	In keeping with the traditional purpose of furthering education and research, 
+	it is - the policy of the copyright owner to permit non-commercial use and 
+	redistribution of - this software. It has been tested carefully, but it is 
+	not guaranteed for any particular - purposes. The copyright owner does not 
+	offer any warranties or representations, nor do - they accept any liabilities 
+	with respect to them. -->
 
-<beans 
-	xmlns="http://www.springframework.org/schema/beans" 
+<beans xmlns="http://www.springframework.org/schema/beans"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
-	<import resource="classpath:/WEB-INF/population/conversion-service.xml"/>	
+	<import
+		resource="classpath:/WEB-INF/population/conversion-service.xml" />
 
+	<bean id="shout01" class="acme.entities.shouts.Shout">
+		<property name="moment" value="2021/10/11 14:46" />
+		<property name="author" value="John Doe" />
+		<property name="text" value="I'm happy!" />
+		<property name="link" value="" />
+	</bean>
+	
+	<bean id="shout02" class="acme.entities.shouts.Shout">
+		<property name="moment" value="2021/10/12 14:46" />
+		<property name="author" value="Jane Doe" />
+		<property name="text" value="I'm the master of my room!" />
+		<property name="link" value="http://www.example.org" />
+	</bean>
+
+	<bean id="shout03" class="acme.entities.shouts.Shout">
+		<property name="moment" value="2021/10/13 14:46" />
+		<property name="author" value="Foo Bar" />
+		<property name="text" value="Just turning 50!" />
+		<property name="link" value="http://happybirthday.com" />
+	</bean>
+
+	<bean id="shout04" class="acme.entities.shouts.Shout">
+		<property name="author" value="The manager" />
+		<property name="text" value="Leslies should be erradicated" />
+		<property name="moment" value="2021/10/14 14:46" />
+		<property name="link" value="http://www.sample-app.com" />
+	</bean>
+	
+	<bean id="shout05" class="acme.entities.shouts.Shout">
+		<property name="author" value="Last month" />
+		<property name="text" value="Not looking so good" />
+		<property name="moment" value="2021/09/11 14:46" />
+		<property name="link" value="" />
+	</bean>
+	
+	<bean id="duty01" class="acme.entities.duties.Duty">
+		<property name="title" value="A duty" />
+		<property name="description" value="Already ended" />
+		<property name="executionStart" value="2021/09/11 14:46" />
+		<property name="executionEnd" value="2021/09/15 14:46" />
+		<property name="workload" value="18:59" />
+		<property name="isPublic" value="true" />
+		<property name="link" value="" />
+	</bean>
+	
+	<bean id="duty02" class="acme.entities.duties.Duty">
+		<property name="title" value="A duty" />
+		<property name="description" value="In the future" />
+		<property name="executionStart" value="2021/11/11 14:46" />
+		<property name="executionEnd" value="2021/11/15 14:46" />
+		<property name="workload" value="18:59" />
+		<property name="isPublic" value="true" />
+		<property name="link" value="http://www.sample-app.com" />
+	</bean>
+	
+	<bean id="duty03" class="acme.entities.duties.Duty">
+		<property name="title" value="A private duty" />
+		<property name="description" value="Is private and over" />
+		<property name="executionStart" value="2021/05/11 14:46" />
+		<property name="executionEnd" value="2021/06/15 14:46" />
+		<property name="workload" value="33:33" />
+		<property name="isPublic" value="false" />
+		<property name="link" value="" />
+	</bean>
+	
+	<bean id="duty04" class="acme.entities.duties.Duty">
+		<property name="title" value="Another duty" />
+		<property name="description" value="Already ended and public" />
+		<property name="executionStart" value="2021/10/01 14:46" />
+		<property name="executionEnd" value="2021/10/02 14:46" />
+		<property name="workload" value="02:59" />
+		<property name="isPublic" value="true" />
+		<property name="link" value="http://www.sample-app.com" />
+	</bean>
+	
 </beans>

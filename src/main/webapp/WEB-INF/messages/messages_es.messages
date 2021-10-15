@@ -11,8 +11,11 @@
 datatables.language	= /libraries/datatables/1.10.18/config/i18n_es.json
 
 default.format.moment = dd/MM/yyyy HH:mm
-
 default.placeholder.moment = dd/mm/yyyy hh:mm
+
+default.placeholder.moment.date = dd/mm/yyyy
+default.format.moment.date = d/M/yyyy
+
 default.placeholder.money = 123.456,78 EUR
 default.placeholder.double = 123.456,78
 default.placeholder.integer = 123.456
