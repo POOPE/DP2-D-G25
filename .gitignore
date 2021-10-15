@@ -31,3 +31,5 @@ mvnw
 mvnw\.cmd
 
 acme-endeavours.log
+
+hs_err_pid10080.log

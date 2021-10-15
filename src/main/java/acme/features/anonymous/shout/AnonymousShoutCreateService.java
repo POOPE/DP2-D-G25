@@ -18,6 +18,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import acme.entities.shouts.Shout;
+import acme.features.spamfilter.SpamFilterService;
 import acme.framework.components.Errors;
 import acme.framework.components.Model;
 import acme.framework.components.Request;
@@ -25,7 +26,7 @@ import acme.framework.entities.Anonymous;
 import acme.framework.services.AbstractCreateService;
 
 @Service
-public class AnonymousShoutCreateService implements AbstractCreateService<Anonymous, Shout> {
+public class AnonymousShoutCreateService extends SpamFilterService<Anonymous,Shout> implements AbstractCreateService<Anonymous, Shout>  {
 
 	// Internal state ---------------------------------------------------------
 
@@ -70,12 +71,12 @@ public class AnonymousShoutCreateService implements AbstractCreateService<Anonym
 		return result;
 	}
 
-	@Override
-	public void validate(final Request<Shout> request, final Shout entity, final Errors errors) {
-		assert request != null;
-		assert entity != null;
-		assert errors != null;
-	}
+//	@Override
+//	public void validate(final Request<Shout> request, final Shout entity, final Errors errors) {
+//		assert request != null;
+//		assert entity != null;
+//		assert errors != null;
+//	}
 
 	@Override
 	public void create(final Request<Shout> request, final Shout entity) {
@@ -85,6 +86,11 @@ public class AnonymousShoutCreateService implements AbstractCreateService<Anonym
 		entity.setMoment(LocalDateTime.now());
 		this.repository.save(entity);
 
+	}
+
+	@Override
+	public void validateAndFilter(final Request<Shout> request, final Shout entity, final Errors errors) {
+		//already implemented in abstract filter
 	}
 
 }
