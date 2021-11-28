@@ -16,6 +16,8 @@
 <%@taglib prefix="jstl" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles"%>
 <%@taglib prefix="acme" tagdir="/WEB-INF/tags"%>
+<%@taglib prefix="security"
+	uri="http://www.springframework.org/security/tags"%>
 
 <acme:menu-bar code="master.menu.home">
 	<acme:menu-left>
@@ -29,15 +31,22 @@
 			<acme:menu-suboption code="master.menu.anonymous.shout.list"
 				action="/anonymous/shout/list" />
 		</acme:menu-option>
-		
+
 		<acme:menu-option code="master.menu.duty" access="isAnonymous()">
 			<acme:menu-suboption code="master.menu.anonymous.duty.list"
 				action="/anonymous/duty/list" />
 		</acme:menu-option>
-		
+
 		<acme:menu-option code="master.menu.duty" access="isAuthenticated()">
 			<acme:menu-suboption code="master.menu.anonymous.duty.list"
 				action="/authenticated/duty/list" />
+			<security:authorize access="hasRole('Officer')">
+				<acme:menu-separator />
+				<acme:menu-suboption code="master.menu.officer.duty.list"
+					action="/officer/duty/list_mine" />
+				<acme:menu-suboption code="master.menu.officer.duty.create"
+					action="/officer/duty/create" />
+			</security:authorize>
 		</acme:menu-option>
 
 
@@ -45,9 +54,11 @@
 			access="hasRole('Administrator')">
 			<acme:menu-suboption code="master.menu.administrator.dashboard"
 				action="/administrator/dashboard/show" />
+			<acme:menu-suboption code="master.menu.administrator.configuration"
+				action="/administrator/configuration/show" />
 			<acme:menu-suboption code="master.menu.administrator.user-accounts"
 				action="/administrator/user-account/list" />
-			
+
 			<acme:menu-separator />
 			<acme:menu-suboption
 				code="master.menu.administrator.populate-initial"
@@ -82,16 +93,19 @@
 			access="isAuthenticated()">
 			<acme:menu-suboption code="master.menu.user-account.general-data"
 				action="/authenticated/user-account/update" />
-			<acme:menu-suboption code="master.menu.user-account.become-provider"
-				action="/authenticated/provider/create"
-				access="!hasRole('Provider')" />
-			<acme:menu-suboption code="master.menu.user-account.provider"
-				action="/authenticated/provider/update" access="hasRole('Provider')" />
-			<acme:menu-suboption code="master.menu.user-account.become-consumer"
-				action="/authenticated/consumer/create"
-				access="!hasRole('Consumer')" />
-			<acme:menu-suboption code="master.menu.user-account.consumer"
-				action="/authenticated/consumer/update" access="hasRole('Consumer')" />
+<%-- 			<acme:menu-suboption code="master.menu.user-account.become-provider" --%>
+<%-- 				action="/authenticated/provider/create" --%>
+<%-- 				access="!hasRole('Provider')" /> --%>
+			<acme:menu-suboption code="master.menu.user-account.become-officer"
+				action="/authenticated/officer/create"
+				access="!hasRole('Officer')" />
+<%-- 			<acme:menu-suboption code="master.menu.user-account.provider" --%>
+<%-- 				action="/authenticated/provider/update" access="hasRole('Provider')" /> --%>
+<%-- 			<acme:menu-suboption code="master.menu.user-account.become-consumer" --%>
+<%-- 				action="/authenticated/consumer/create" --%>
+<%-- 				access="!hasRole('Consumer')" /> --%>
+<%-- 			<acme:menu-suboption code="master.menu.user-account.consumer" --%>
+<%-- 				action="/authenticated/consumer/update" access="hasRole('Consumer')" /> --%>
 		</acme:menu-option>
 
 		<acme:menu-option code="master.menu.sign-out"
