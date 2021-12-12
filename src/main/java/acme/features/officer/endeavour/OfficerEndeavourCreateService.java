@@ -104,6 +104,14 @@ public class OfficerEndeavourCreateService extends SpamFilterService<Officer, En
 	@Transactional
 	@Override
 	public void validateAndFilter(final Request<Endeavour> request, final Endeavour entity, final Errors errors) {
+		
+		try {
+			Assert.isTrue(entity.getExecutionEnd().isAfter(entity.getExecutionStart()),"Execution start after execution end");
+		} catch (final Exception e) {
+			final String errorMsg = MessageHelper.getMessage("officer.endeavour.form.label.error.execution.inconsistency");
+			errors.add("executionEnd", errorMsg);
+		}
+		
 		//fetch duties
 		if (request.getModel().getAttribute("binded_duties_input", String.class) != null && !request.getModel().getAttribute("binded_duties_input", String.class).isBlank()) {
 			final List<Integer> dutyIds = Arrays.asList(request.getModel().getAttribute("binded_duties_input", String.class).split(",")).stream().map(s -> Integer.valueOf(s.substring(5))).collect(Collectors.toList());
@@ -147,9 +155,9 @@ public class OfficerEndeavourCreateService extends SpamFilterService<Officer, En
 	@Transactional
 	@Override
 	public void onFailure(final Request<Endeavour> request, final Response<Endeavour> response, final Throwable oops) {
-		request.getModel().setAttribute("available_duties", this.mapper.map(this.dutyRepo.findAll(), new TypeToken<List<DutyDto>>() {
+		response.getModel().setAttribute("available_duties", this.mapper.map(this.dutyRepo.findAll(), new TypeToken<List<DutyDto>>() {
 		}.getType()));
-		request.getModel().setAttribute("binded_duties", new ArrayList<DutyDto>());
+		response.getModel().setAttribute("binded_duties", new ArrayList<DutyDto>());
 	}
 	
 	
