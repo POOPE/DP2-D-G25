@@ -48,6 +48,18 @@
 					action="/officer/duty/create" />
 			</security:authorize>
 		</acme:menu-option>
+		
+		<acme:menu-option code="master.menu.endeavour">
+			<acme:menu-suboption code="master.menu.anonymous.endeavour.list"
+				action="/anonymous/endeavour/list" access="isAnonymous()"/>
+			<security:authorize access="hasRole('Officer')">
+				<acme:menu-separator />
+				<acme:menu-suboption code="master.menu.officer.endeavour.list"
+					action="/officer/endeavour/list_mine" />
+				<acme:menu-suboption code="master.menu.officer.endeavour.create"
+					action="/officer/endeavour/create" />
+			</security:authorize>
+		</acme:menu-option>
 
 
 		<acme:menu-option code="master.menu.administrator"

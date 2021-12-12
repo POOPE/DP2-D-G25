@@ -34,8 +34,14 @@ master.menu.sign-in = Entrar
 master.menu.sign-out = Salir
 
 # master.menu.officer #######################################################
+
+master.menu.endeavour = Esfuerzos
+
 master.menu.officer.duty.list = Ver mis deberes
 master.menu.officer.duty.create = Crear deberes
+
+master.menu.officer.endeavour.list = Ver mis esfuerzos
+master.menu.officer.endeavour.create = Crear esfuerzos
 
 # master.menu.anonymous #######################################################
 
@@ -44,6 +50,7 @@ master.menu.consumer.jbn-favourite-link = Enlace favorito de Juan Buiza
 master.menu.anonymous.shout.list = Ver gritos
 master.menu.anonymous.shout.create = Meter grito
 master.menu.anonymous.duty.list = Ver deberes
+master.menu.anonymous.endeavour.list = Ver esfuerzos
 
 # master.menu.administrator ###################################################
 

@@ -12,6 +12,7 @@
 
 package acme.features.administrator.configuration;
 
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -30,6 +31,9 @@ public class AdministratorConfigurationUpdateService implements AbstractUpdateSe
 	@Autowired
 	protected AdministratorConfigurationRepository repository;
 
+	@Autowired
+	protected ModelMapper modelMapper;
+	
 	// AbstractCreateService<Administrator, Shout> interface --------------
 
 
@@ -56,7 +60,6 @@ public class AdministratorConfigurationUpdateService implements AbstractUpdateSe
 		assert model != null;
 
 		request.unbind(entity, model, "spamWords", "threshold");
-		model.setAttribute("configurationId", entity.getId());
 	}
 	
 	@Override
@@ -75,7 +78,9 @@ public class AdministratorConfigurationUpdateService implements AbstractUpdateSe
 	public void update(final Request<Configuration> request, final Configuration entity) {
 		assert request != null;
 		assert entity != null;
+		
+		final Configuration config = this.modelMapper.map(entity, Configuration.class);
 
-		this.repository.save(entity);
+		this.repository.save(config);
 	}
 }

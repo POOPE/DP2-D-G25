@@ -1,0 +1,41 @@
+# i18n_es.messages
+#
+# Copyright (C) 2012-2021 Rafael Corchuelo.
+#
+# In keeping with the traditional purpose of furthering education and research, it is
+# the policy of the copyright owner to permit non-commercial use and redistribution of
+# this software. It has been tested carefully, but it is not guaranteed for any particular
+# purposes.  The copyright owner does not offer any warranties or representations, nor do
+# they accept any liabilities with respect to them.
+
+endeavour.suggest.execution = Sugerir periodo
+
+officer.endeavour.form.label.title = Titulo
+officer.endeavour.form.label.description = Descripcion 
+officer.endeavour.form.label.executionstart = Inicio
+officer.endeavour.form.label.executionend = Fin
+officer.endeavour.form.label.workload = Carga
+officer.endeavour.form.label.link =  Link
+officer.endeavour.form.label.ispublic = Publico
+officer.endeavour.form.button.return = Volver
+
+officer.endeavour.form.error.duty.publicrestriction = No se permite deberes privados en esfuerzos publicos
+officer.endeavour.form.error.duty.executionperiod = Los deberes no caben en el tiempo de ejecucion
+
+datetime.format = dd-MM-yyyy HH:mm
+
+officer.endeavour.form.button.add = Añadir deberes
+officer.endeavour.form.button.update = Guardar
+officer.endeavour.form.button.create = Crear
+officer.endeavour.form.button.delete = Borrar
+ 
+officer.endeavour.list.label.title = Titulo
+officer.endeavour.list.label.description = Descripcion 
+officer.endeavour.list.label.executionstart = Inicio
+officer.endeavour.list.label.executionend = Fin
+officer.endeavour.list.label.workload = Carga
+officer.endeavour.list.label.link =  Link
+
+officer.endeavour.form.label.moment = Fecha
+officer.endeavour.form.label.money = Precio
+officer.endeavour.form.label.important =  Importante

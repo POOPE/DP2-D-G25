@@ -18,15 +18,24 @@
 
 <acme:form>
 	<acme:form-textbox code="officer.duty.form.label.title" path="title" />
-	<acme:form-textbox code="officer.duty.form.label.description" path="description" />
-	
-	<acme:form-textbox code="officer.duty.form.label.executionstart" path="executionStart" />
-	<acme:form-textbox code="officer.duty.form.label.executionend" path="executionEnd" />
-	
-	<acme:form-textbox code="officer.duty.form.label.workload" path="workload" />
-	
+	<acme:form-textbox code="officer.duty.form.label.description"
+		path="description" />
+
+	<acme:form-textbox code="officer.duty.form.label.executionstart"
+		path="executionStart" />
+	<acme:form-textbox code="officer.duty.form.label.executionend"
+		path="executionEnd" />
+
+	<acme:form-textbox code="officer.duty.form.label.workload"
+		path="workload" />
+
+	<acme:form-checkbox code="officer.duty.form.label.public"
+		path="isPublic" />
+
 	<acme:form-textbox code="officer.duty.form.label.link" path="link" />
-	
+
+
+
 	<acme:form-submit test="${command == 'show' }"
 		code="officer.duty.form.button.update" action="/officer/duty/update" />
 	<acme:form-submit test="${command == 'show' }"

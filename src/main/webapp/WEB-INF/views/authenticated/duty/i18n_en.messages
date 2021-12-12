@@ -16,7 +16,8 @@ authenticated.duty.form.label.workload = Workload
 authenticated.duty.form.label.link =  Link
 authenticated.duty.form.button.return = Return
 
-
+authenticated.duty.list.label.public =  Public
+authenticated.duty.form.label.public =  Public
 
 authenticated.duty.list.label.title = Title
 authenticated.duty.list.label.description = Description 

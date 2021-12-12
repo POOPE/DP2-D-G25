@@ -15,6 +15,8 @@ officer.duty.form.label.executionend = End
 officer.duty.form.label.workload = Workload
 officer.duty.form.label.link =  Link
 officer.duty.form.button.return = Return
+officer.duty.form.label.public = Public
+officer.duty.list.label.public = Public
 
 officer.duty.form.button.update = Save
 officer.duty.form.button.create = Create

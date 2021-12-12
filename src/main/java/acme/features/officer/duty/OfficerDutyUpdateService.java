@@ -8,7 +8,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import acme.entities.duties.Duty;
+import acme.entities.endeavours.Endeavour;
 import acme.entities.roles.Officer;
+import acme.features.officer.endeavour.OfficerEndeavourRepository;
 import acme.features.spamfilter.SpamFilterService;
 import acme.framework.components.Errors;
 import acme.framework.components.Model;
@@ -19,10 +21,13 @@ import acme.framework.services.AbstractUpdateService;
 public class OfficerDutyUpdateService extends SpamFilterService<Officer, Duty> implements AbstractUpdateService<Officer, Duty> {
 
 	@Autowired
-	private OfficerDutyRepository	repo;
+	private OfficerEndeavourRepository	endeavourRepo;
 
 	@Autowired
-	private ModelMapper				modelMapper;
+	private OfficerDutyRepository		repo;
+
+	@Autowired
+	private ModelMapper					modelMapper;
 
 
 	@Override
@@ -37,7 +42,7 @@ public class OfficerDutyUpdateService extends SpamFilterService<Officer, Duty> i
 		assert entity != null;
 		assert model != null;
 
-		request.unbind(entity, model, "title", "description", "executionStart", "executionEnd", "workload", "link");
+		request.unbind(entity, model, "title", "description", "executionStart", "executionEnd", "workload", "link", "isPublic");
 
 	}
 
@@ -62,15 +67,20 @@ public class OfficerDutyUpdateService extends SpamFilterService<Officer, Duty> i
 
 	@Override
 	public void update(final Request<Duty> request, final Duty entity) {
-		this.repo.findById(request.getModel().getInteger("id")).ifPresent(i->{
+		this.repo.findById(request.getModel().getInteger("id")).ifPresent(i -> {
 			final Duty duty = this.modelMapper.map(entity, Duty.class);
 			this.repo.save(duty);
-		});;
+		});
+		;
 	}
 
 	@Override
 	public void validateAndFilter(final Request<Duty> request, final Duty entity, final Errors errors) {
 		//nothing to do
+		if (Boolean.FALSE.equals(entity.getIsPublic()) && this.endeavourRepo.findAll(Endeavour.withDuty(entity.getId())).stream().anyMatch(e -> e.getIsPublic())) {
+			final String message = request.getLocale().getLanguage().equals("es") ? "Este deber forma parte de un esfuerzo publico" : "This duty is part of a public endeavour";
+			errors.add("isPublic", message);
+		}
 	}
 
 }

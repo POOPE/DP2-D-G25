@@ -260,7 +260,7 @@ public abstract class AbstractController<R extends UserRole, E> {
 		} catch (final Throwable oops) {
 			// HINT: if a throwable is caught, then the current transaction must be rollbacked, if any,
 			// HINT: the service must execute the 'onFailure' method, and the panic view must be returned.
-
+			oops.printStackTrace();
 			if (this.isTransactionActive()) {
 				this.rollbackTransaction();
 			}

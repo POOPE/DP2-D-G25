@@ -16,7 +16,8 @@ anonymous.duty.form.label.workload = Workload
 anonymous.duty.form.label.link =  Link
 anonymous.duty.form.button.return = Return
 
-
+anonymous.duty.form.label.public = Public
+anonymous.duty.list.label.public = Public
 
 anonymous.duty.list.label.title = Title
 anonymous.duty.list.label.description = Description 

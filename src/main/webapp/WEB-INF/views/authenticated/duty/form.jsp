@@ -27,7 +27,7 @@
 	<acme:form-textbox code="authenticated.duty.form.label.workload" path="workload" />
 	
 	<acme:form-textbox code="authenticated.duty.form.label.link" path="link" />
-	
+	<acme:form-checkbox code="authenticated.duty.form.label.public" path="isPublic" />
 	
 	<acme:form-return code="authenticated.duty.form.button.return" />
 </acme:form>

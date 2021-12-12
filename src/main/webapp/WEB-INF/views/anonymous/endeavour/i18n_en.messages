@@ -1,0 +1,39 @@
+# i18n_en.messages
+#
+# Copyright (C) 2012-2021 Rafael Corchuelo.
+#
+# In keeping with the traditional purpose of furthering education and research, it is
+# the policy of the copyright owner to permit non-commercial use and redistribution of
+# this software. It has been tested carefully, but it is not guaranteed for any particular
+# purposes.  The copyright owner does not offer any warranties or representations, nor do
+# they accept any liabilities with respect to them.
+
+endeavour.suggest.execution = Suggest execution period
+
+officer.endeavour.form.label.title = Title
+officer.endeavour.form.label.description = Description 
+officer.endeavour.form.label.executionstart = Start
+officer.endeavour.form.label.executionend = End
+officer.endeavour.form.label.ispublic = Public
+officer.endeavour.form.label.workload = Workload
+officer.endeavour.form.label.link =  Link
+officer.endeavour.form.button.return = Return
+
+officer.endeavour.form.error.duty.publicrestriction = Private duties not allowed for a public endeavour
+officer.endeavour.form.error.duty.executionperiod = Duties do not fit in given execution period
+
+officer.endeavour.form.button.add = Add duty
+officer.endeavour.form.button.update = Save
+officer.endeavour.form.button.create = Create
+officer.endeavour.form.button.delete = Delete
+
+datetime.format = yyyy/MM/dd HH:mm
+
+officer.endeavour.list.label.title = Title
+officer.endeavour.list.label.description = Description 
+officer.endeavour.list.label.executionstart = Start
+officer.endeavour.list.label.executionend = End
+officer.endeavour.list.label.workload = Workload
+officer.endeavour.list.label.link =  Link
+officer.endeavour.list.label.public =  Public
+

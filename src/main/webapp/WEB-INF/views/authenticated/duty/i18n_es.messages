@@ -22,7 +22,8 @@ authenticated.duty.list.label.executionstart = Inicio
 authenticated.duty.list.label.executionend = Fin
 authenticated.duty.list.label.workload = Carga
 authenticated.duty.list.label.link =  Link
-
+authenticated.duty.list.label.public =  Publico
+authenticated.duty.form.label.public =  Publico
 authenticated.duty.form.label.moment = Fecha
 authenticated.duty.form.label.money = Precio
 authenticated.duty.form.label.important =  Importante

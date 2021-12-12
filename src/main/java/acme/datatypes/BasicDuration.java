@@ -26,20 +26,17 @@ public class BasicDuration implements Comparable<BasicDuration>{
 	private Integer	minutes;
 
 
-	public Integer getAsMinutes() {
-		return (this.hours * 60) + this.minutes;
-	}
 
-	@Override
-	public String toString() {
-		return this.hours + ":" + this.minutes;
-	}
 
 	public static BasicDuration of(final LocalDate start, final LocalDate end) {
 		final Integer minutes = Math.toIntExact(Duration.between(start, end).toMinutes());
 		return new BasicDuration(null,minutes);
 	}
 
+	public static BasicDuration of(final Duration duration) {
+		return new BasicDuration(null, Long.valueOf(duration.toMinutes()).intValue());	
+	}
+	
 	/**
 	 * If minutes are more than 59 it adds to hours
 	 * 
@@ -65,6 +62,19 @@ public class BasicDuration implements Comparable<BasicDuration>{
 		}else {
 			this.minutes = 0;
 		}
+	}
+	
+	public Integer getAsMinutes() {
+		return (this.hours * 60) + this.minutes;
+	}
+	
+	public Duration getAsDuration() {
+		return Duration.ofMinutes(this.getAsMinutes());
+	}
+	
+	@Override
+	public String toString() {
+		return this.hours + ":" + this.minutes;
 	}
 
 	/**

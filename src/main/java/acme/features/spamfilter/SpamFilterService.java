@@ -66,8 +66,9 @@ public abstract class SpamFilterService<R extends UserRole, E> implements Valida
 			SpamFilterService.logger.info("SpamFilterService  - Spam word count: {0}", spamWordCount);
 			
 			if ( spamWordCount / (wordCount * 1.0) >= threshold) {
-				SpamFilterService.logger.warn("SpamFilterService - Spam words in entity exceeding permisible threshold. Found "+spamWordCount+"/"+wordCount+" words were spam.");
-				errors.state(request, false, "*", "form.error.spamDetected");
+				SpamFilterService.logger.warn("SpamFilterService - Spam words in entity exceeding permisible threshold. Found {0}/{1} words were spam.",spamWordCount,wordCount);
+				final String message = request.getLocale().getLanguage().equals("es") ? "Se ha detectado spam" : "Spam words detected";
+				errors.add("duties", message);
 			}
 
 		} catch (final Exception e) {

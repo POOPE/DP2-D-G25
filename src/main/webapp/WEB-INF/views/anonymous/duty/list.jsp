@@ -17,15 +17,17 @@
 
 <acme:list>
 	<acme:list-column code="anonymous.duty.list.label.title" path="title"
-		width="15%" sortable="false"/>
+		width="10%" sortable="false" />
 	<acme:list-column code="anonymous.duty.list.label.description"
-		path="description" sortable="false"/>
+		path="description" sortable="false" />
 	<acme:list-column code="anonymous.duty.list.label.executionstart"
 		path="executionStart" width="10%" />
 	<acme:list-column code="anonymous.duty.list.label.executionend"
 		path="executionEnd" width="10%" />
-	<acme:list-column code="anonymous.duty.list.label.workload"
+	<acme:list-column code="officer.duty.list.label.workload"
 		path="workload" width="10%" />
+	<acme:list-column code="officer.duty.list.label.public" path="isPublic"
+		width="5%" />
 	<acme:list-column code="anonymous.duty.list.label.link" path="link"
 		width="15%" sortable="false" />
 </acme:list>
