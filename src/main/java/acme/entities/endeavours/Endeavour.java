@@ -41,10 +41,10 @@ public class Endeavour extends DomainEntity {
 	*/
 	private static final long	serialVersionUID	= 7862533006967715121L;
 
-	@ManyToOne(fetch=FetchType.EAGER, optional=false)
+	@ManyToOne(fetch = FetchType.EAGER, optional = false)
 	private Officer				officer;
 
-	@ManyToMany(fetch=FetchType.LAZY)
+	@ManyToMany(fetch = FetchType.LAZY)
 	private List<Duty>			duties;
 
 	@Column(nullable = false)
@@ -115,7 +115,7 @@ public class Endeavour extends DomainEntity {
 		};
 	}
 
-	public static Specification<Endeavour> isPublicAndNotFinished() {
+	public static Specification<Endeavour> isFinished(final boolean finished) {
 		return new Specification<Endeavour>() {
 
 			/**
@@ -127,13 +127,32 @@ public class Endeavour extends DomainEntity {
 			@Override
 			public Predicate toPredicate(final Root<Endeavour> root, final CriteriaQuery<?> query, final CriteriaBuilder criteriaBuilder) {
 
-				return criteriaBuilder.and(criteriaBuilder.equal(root.get("isPublic"), true), criteriaBuilder.greaterThanOrEqualTo(root.get("executionEnd"), LocalDateTime.now()));
+				return finished ? criteriaBuilder.lessThanOrEqualTo(root.get("executionEnd"), LocalDateTime.now()) : criteriaBuilder.greaterThanOrEqualTo(root.get("executionEnd"), LocalDateTime.now());
 
 			}
 
 		};
 	}
-	
+
+	public static Specification<Endeavour> isPublic(final boolean finished) {
+		return new Specification<Endeavour>() {
+
+			/**
+			 * 
+			 */
+			private static final long serialVersionUID = -7040689053525813319L;
+
+
+			@Override
+			public Predicate toPredicate(final Root<Endeavour> root, final CriteriaQuery<?> query, final CriteriaBuilder criteriaBuilder) {
+
+				return criteriaBuilder.equal(root.get("isPublic"), finished);
+
+			}
+
+		};
+	}
+
 	public static Specification<Endeavour> withDuty(final Integer dutyId) {
 		return new Specification<Endeavour>() {
 
@@ -145,7 +164,7 @@ public class Endeavour extends DomainEntity {
 
 			@Override
 			public Predicate toPredicate(final Root<Endeavour> root, final CriteriaQuery<?> query, final CriteriaBuilder criteriaBuilder) {
-				final Join<Endeavour,Duty> join = root.join("duties");
+				final Join<Endeavour, Duty> join = root.join("duties");
 				return criteriaBuilder.equal(join.get("id"), dutyId);
 
 			}

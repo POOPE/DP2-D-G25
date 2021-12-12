@@ -27,6 +27,8 @@ import acme.features.spamfilter.SpamFilterService;
 import acme.framework.components.Errors;
 import acme.framework.components.Model;
 import acme.framework.components.Request;
+import acme.framework.components.Response;
+import acme.framework.helpers.MessageHelper;
 import acme.framework.services.AbstractCreateService;
 
 @Service
@@ -62,7 +64,7 @@ public class OfficerEndeavourCreateService extends SpamFilterService<Officer, En
 		}.getType()));
 		model.setAttribute("binded_duties", new ArrayList<DutyDto>());
 
-		request.unbind(entity, model, "executionStart", "executionEnd", "isPublic", "duration");
+		request.unbind(entity, model, "executionStart", "executionEnd");
 	}
 
 	@Override
@@ -89,10 +91,10 @@ public class OfficerEndeavourCreateService extends SpamFilterService<Officer, En
 			final Integer minutes = entity.getDuties().stream().map(Duty::getWorkload).mapToInt(BasicDuration::getAsMinutes).sum();
 			final BasicDuration duration = new BasicDuration(0, minutes);
 			entity.setDuration(duration);
-		}else {
+		} else {
 			entity.setDuration(new BasicDuration());
 		}
-		
+
 		if (owner.isPresent()) {
 			entity.setOfficer(owner.get());
 			this.repo.save(entity);
@@ -119,8 +121,8 @@ public class OfficerEndeavourCreateService extends SpamFilterService<Officer, En
 				});
 				Assert.isTrue(!publicRestriction, "Public endeavours cannot have private duties");
 			} catch (final Exception e) {
-				final String message = request.getLocale().getLanguage().equals("es") ? "Un esfuerzo publico puede contener deberes privados" : "Private duties are not allowed for public endeavours";
-				errors.add("duties", message);
+				final String errorMsg = MessageHelper.getMessage("officer.endeavour.form.error.duty.publicrestriction");
+				errors.add("duties", errorMsg);
 			}
 
 			//execution period
@@ -132,19 +134,23 @@ public class OfficerEndeavourCreateService extends SpamFilterService<Officer, En
 					Assert.isTrue(entity.getExecutionStart().isBefore(dutyExecutionPeriodStart.get()) && entity.getExecutionEnd().isAfter(dutyExecutionPeriodEnd.get()), "Duties do not fit within given endeavour execution period");
 				}
 			} catch (final Exception e) {
-				final String message = request.getLocale().getLanguage().equals("es") ? "Los deberes no caben en el periodo del esfuerzo" : "Duties do not fit inside the execution period";
-				errors.add("duties", message);
+				final String errorMsg = MessageHelper.getMessage("officer.endeavour.form.error.duty.executionperiod");
+				errors.add("duties", errorMsg);
 			}
 
 			if (!errors.hasErrors()) {
 				entity.setDuties(duties);
 			}
 		}
-
-		if (errors.hasErrors()) {
-			request.getModel().setAttribute("available_duties", this.mapper.map(this.dutyRepo.findAll(), new TypeToken<List<DutyDto>>() {
-			}.getType()));
-			request.getModel().setAttribute("binded_duties", new ArrayList<DutyDto>());
-		}
 	}
+
+	@Transactional
+	@Override
+	public void onFailure(final Request<Endeavour> request, final Response<Endeavour> response, final Throwable oops) {
+		request.getModel().setAttribute("available_duties", this.mapper.map(this.dutyRepo.findAll(), new TypeToken<List<DutyDto>>() {
+		}.getType()));
+		request.getModel().setAttribute("binded_duties", new ArrayList<DutyDto>());
+	}
+	
+	
 }

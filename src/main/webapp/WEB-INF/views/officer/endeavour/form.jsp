@@ -40,10 +40,9 @@
 			</label>
 		</div>
 	</div>
-	<security:authorize access="hasRole('Officer')">
-		<acme:form-checkbox code="officer.endeavour.form.label.ispublic"
-			readonly="true" path="isPublic" />
-	</security:authorize>
+	<acme:form-checkbox code="officer.endeavour.form.label.ispublic"
+		readonly="true" path="isPublic" />
+
 
 	<acme:form-textbox readonly="true"
 		code="officer.endeavour.form.label.workload" path="duration" />
@@ -69,14 +68,14 @@
 								varStatus="loop">
 								<div class="col m-2">
 									<label id="duty_${duty.id}"
-										class="btn btn-warning btn-duty-select text-left"> <jstl:out
-											value="${duty.description}"></jstl:out> <jstl:if
+										class="btn btn-warning btn-duty-select text-left"> <span><strong><jstl:out
+													value="${duty.title}"></jstl:out></strong></span> <jstl:if
 											test="${duty.isPublic}">
 											<span class="fa fa-lock-open"></span>
 										</jstl:if> <jstl:if test="${!duty.isPublic}">
 											<span class="fa fa-lock"></span>
-										</jstl:if> <br> <acme:message
-											code="officer.endeavour.form.label.workload" />:&nbsp;<jstl:out
+										</jstl:if> <br> <jstl:out value="${duty.description}"></jstl:out> <br>
+										<acme:message code="officer.endeavour.form.label.workload" />:&nbsp;<jstl:out
 											value="${duty.workload}"></jstl:out> <br> <acme:localDateTime
 											date="${duty.executionStart}" pattern="${date_format}" />
 										&nbsp;-&nbsp; <acme:localDateTime date="${duty.executionEnd}"
@@ -127,14 +126,14 @@
 								varStatus="loop">
 								<div class="col m-2">
 									<label id="duty_${duty.id}"
-										class="btn btn-warning btn-duty-select text-left"> <jstl:out
-											value="${duty.description}"></jstl:out> <jstl:if
+										class="btn btn-warning btn-duty-select text-left"> <span><strong><jstl:out
+													value="${duty.title}"></jstl:out></strong></span> <jstl:if
 											test="${duty.isPublic}">
 											<span class="fa fa-lock-open"></span>
 										</jstl:if> <jstl:if test="${!duty.isPublic}">
 											<span class="fa fa-lock"></span>
-										</jstl:if> <br> <acme:message
-											code="officer.endeavour.form.label.workload" />:&nbsp;<jstl:out
+										</jstl:if> <br> <jstl:out value="${duty.description}"></jstl:out> <br>
+										<acme:message code="officer.endeavour.form.label.workload" />:&nbsp;<jstl:out
 											value="${duty.workload}"></jstl:out> <br> <acme:localDateTime
 											date="${duty.executionStart}" pattern="${date_format}" />
 										&nbsp;-&nbsp; <acme:localDateTime date="${duty.executionEnd}"
@@ -152,6 +151,9 @@
 		</div>
 	</div>
 
+	<acme:form-submit test="${command == 'create'}"
+		code="officer.endeavour.form.button.create"
+		action="/officer/endeavour/create" />
 
 	<jstl:if test="${!isPublic}">
 		<acme:form-submit test="${command == 'show' }"
@@ -164,18 +166,39 @@
 	<acme:form-submit test="${command == 'show' }"
 		code="officer.endeavour.form.button.delete"
 		action="/officer/endeavour/delete" />
-	<acme:form-submit test="${command == 'create'}"
-		code="officer.endeavour.form.button.create"
-		action="/officer/endeavour/create" />
-	<acme:form-submit test="${command == 'update'}"
-		code="officer.endeavour.form.button.update"
-		action="/officer/endeavour/update" />
+
 	<jstl:if test="${!isPublic}">
 		<acme:form-submit test="${command == 'update' }"
 			code="officer.endeavour.form.button.add"
 			action="/officer/endeavour/publish" />
 	</jstl:if>
+	<acme:form-submit test="${command == 'update'}"
+		code="officer.endeavour.form.button.update"
+		action="/officer/endeavour/update" />
+	<acme:form-submit test="${command == 'update' }"
+		code="officer.endeavour.form.button.delete"
+		action="/officer/endeavour/delete" />
 
+	<jstl:if test="${!isPublic}">
+		<acme:form-submit test="${command == 'publish' }"
+			code="officer.endeavour.form.button.add"
+			action="/officer/endeavour/publish" />
+	</jstl:if>
+	<acme:form-submit test="${command == 'publish'}"
+		code="officer.endeavour.form.button.update"
+		action="/officer/endeavour/update" />
+	<acme:form-submit test="${command == 'publish' }"
+		code="officer.endeavour.form.button.delete"
+		action="/officer/endeavour/delete" />
+
+	<jstl:if test="${!isPublic}">
+		<acme:form-submit test="${command == 'delete' }"
+			code="officer.endeavour.form.button.add"
+			action="/officer/endeavour/publish" />
+	</jstl:if>
+	<acme:form-submit test="${command == 'delete'}"
+		code="officer.endeavour.form.button.update"
+		action="/officer/endeavour/update" />
 	<acme:form-submit test="${command == 'delete'}"
 		code="officer.endeavour.form.button.delete"
 		action="/officer/endeavour/delete" />

@@ -1,0 +1,2 @@
+timestamp,test-class,test-method,time,description,result
+2021-12-12 17:24:40.124,acme.testing.anonymous.duty.AnonymousDutyShowTest,negativeTaskShowing,5078,"negativeTaskShowing()",The system doesn't navigate from '/master/sign-in' to '/master/welcome'

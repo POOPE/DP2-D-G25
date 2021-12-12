@@ -21,13 +21,20 @@
 <%@attribute name="code" required="true" type="java.lang.String"%>
 <%@attribute name="action" required="true" type="java.lang.String"%>
 <%@attribute name="access" required="false" type="java.lang.String"%>
+<%@attribute name="id" required="false" type="java.lang.String"%>
 
 <jstl:if test="${access == null}">
 	<jstl:set var="access" value="true"/>
 </jstl:if>
+<jstl:if test="${not empty id}">
+	<jstl:set var="addId" value="true"/>
+</jstl:if>
+<jstl:if test="${empty id}">
+	<jstl:set var="addId" value="false"/>
+</jstl:if>
 
 <security:authorize access="${access}">	
-	<a href="javascript: clearReturnUrl(); redirect('${action}')" class="dropdown-item">
+	<a id="${addId ? id : ''}" href="javascript: clearReturnUrl(); redirect('${action}')" class="dropdown-item">
 		<acme:message code="${code}"/> 
 	</a>
 </security:authorize>

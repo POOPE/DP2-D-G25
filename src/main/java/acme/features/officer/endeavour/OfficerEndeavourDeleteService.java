@@ -34,7 +34,7 @@ public class OfficerEndeavourDeleteService implements AbstractDeleteService<Offi
 		assert entity != null;
 		assert model != null;
 
-		request.unbind(entity, model, "title", "description", "executionStart","executionEnd","workload","link");
+		request.unbind(entity, model, "executionStart","executionEnd","duration","isPublic");
 		
 	}
 

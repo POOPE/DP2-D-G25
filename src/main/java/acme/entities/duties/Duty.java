@@ -10,9 +10,12 @@ import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
+import javax.validation.Valid;
+import javax.validation.constraints.Future;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
+import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.URL;
 import org.springframework.data.jpa.domain.Specification;
 
@@ -35,14 +38,19 @@ public class Duty extends DomainEntity {
 	@ManyToOne(fetch=FetchType.EAGER, optional=false)
 	private Officer officer;
 	@NotBlank
+	@Length(max = 80)
 	private String				title;
 	@NotBlank
+	@Length(max = 500)
 	private String				description;
 	@NotNull
+	@Future
 	private LocalDateTime		executionStart;
 	@NotNull
+	@Future
 	private LocalDateTime		executionEnd;
 	@NotNull
+	@Valid
 	private BasicDuration		workload;
 	@URL
 	private String				link;
@@ -127,7 +135,7 @@ public class Duty extends DomainEntity {
 		};
 	}
 	
-	public static Specification<Duty> canBeAddedToEndeavour(final boolean isPublic) {
+	public static Specification<Duty> canBeAddedToEndeavour(final boolean endeavourIsPublic) {
 		return new Specification<Duty>() {
 
 			/**
@@ -138,7 +146,7 @@ public class Duty extends DomainEntity {
 
 			@Override
 			public Predicate toPredicate(final Root<Duty> root, final CriteriaQuery<?> query, final CriteriaBuilder criteriaBuilder) {
-				if(isPublic) {
+				if(endeavourIsPublic) {
 					return criteriaBuilder.equal(root.get("isPublic"), true);
 				}else {
 					return criteriaBuilder.and();

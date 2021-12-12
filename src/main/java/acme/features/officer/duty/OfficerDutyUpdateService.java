@@ -15,6 +15,7 @@ import acme.features.spamfilter.SpamFilterService;
 import acme.framework.components.Errors;
 import acme.framework.components.Model;
 import acme.framework.components.Request;
+import acme.framework.helpers.MessageHelper;
 import acme.framework.services.AbstractUpdateService;
 
 @Service
@@ -78,8 +79,8 @@ public class OfficerDutyUpdateService extends SpamFilterService<Officer, Duty> i
 	public void validateAndFilter(final Request<Duty> request, final Duty entity, final Errors errors) {
 		//nothing to do
 		if (Boolean.FALSE.equals(entity.getIsPublic()) && this.endeavourRepo.findAll(Endeavour.withDuty(entity.getId())).stream().anyMatch(e -> e.getIsPublic())) {
-			final String message = request.getLocale().getLanguage().equals("es") ? "Este deber forma parte de un esfuerzo publico" : "This duty is part of a public endeavour";
-			errors.add("isPublic", message);
+			final String errorMsg = MessageHelper.getMessage("officer.duty.form.error.publicrestriction");
+			errors.add("duties", errorMsg);
 		}
 	}
 

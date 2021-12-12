@@ -80,35 +80,35 @@
 	<bean id="shout01" class="acme.entities.shouts.Shout">
 		<property name="moment" value="2021/10/11 14:46" />
 		<property name="author" value="John Doe" />
-		<property name="text" value="I'm happy!" />
+		<property name="text" value="Two months old" />
 		<property name="link" value="" />
 	</bean>
 
 	<bean id="shout02" class="acme.entities.shouts.Shout">
 		<property name="moment" value="2021/10/12 14:46" />
 		<property name="author" value="Jane Doe" />
-		<property name="text" value="I'm the master of my room!" />
+		<property name="text" value="Another on that's two months old" />
 		<property name="link" value="http://www.example.org" />
 	</bean>
 
 	<bean id="shout03" class="acme.entities.shouts.Shout">
-		<property name="moment" value="2021/10/13 14:46" />
+		<property name="moment" value="2021/11/22 14:46" />
 		<property name="author" value="Foo Bar" />
-		<property name="text" value="Just turning 50!" />
+		<property name="text" value="Less than a month old" />
 		<property name="link" value="http://happybirthday.com" />
 	</bean>
 
 	<bean id="shout04" class="acme.entities.shouts.Shout">
-		<property name="author" value="The manager" />
-		<property name="text" value="Leslies should be erradicated" />
-		<property name="moment" value="2021/10/14 14:46" />
+		<property name="author" value="Bossman" />
+		<property name="text" value="'This should've been done yesterday' -The client" />
+		<property name="moment" value="2021/12/12 14:46" />
 		<property name="link" value="http://www.sample-app.com" />
 	</bean>
 
 	<bean id="shout05" class="acme.entities.shouts.Shout">
-		<property name="author" value="Last month" />
-		<property name="text" value="Not looking so good" />
-		<property name="moment" value="2021/09/11 14:46" />
+		<property name="author" value="D. Daniel" />
+		<property name="text" value="AR AR AR AR AR AR" />
+		<property name="moment" value="2021/11/13 03:33" />
 		<property name="link" value="" />
 	</bean>
 
@@ -129,8 +129,8 @@
 		<property name="officer" ref="officerOfficer" />
 		<property name="title" value="A duty" />
 		<property name="description" value="In the future" />
-		<property name="executionStart" value="2021/11/11 14:46" />
-		<property name="executionEnd" value="2021/11/15 14:46" />
+		<property name="executionStart" value="2022/01/11 14:46" />
+		<property name="executionEnd" value="2022/01/15 14:46" />
 		<property name="workload" value="18:59" />
 		<property name="isPublic" value="true" />
 		<property name="link" value="http://www.sample-app.com" />
@@ -157,10 +157,56 @@
 		<property name="isPublic" value="true" />
 		<property name="link" value="http://www.sample-app.com" />
 	</bean>
+	
+	<bean id="duty05" class="acme.entities.duties.Duty">
+		<property name="officer" ref="officerOfficer" />
+		<property name="title" value="A duty" />
+		<property name="description" value="Non-finished and public" />
+		<property name="executionStart" value="2021/12/12 14:46" />
+		<property name="executionEnd" value="2021/12/15 14:46" />
+		<property name="workload" value="04:21" />
+		<property name="isPublic" value="true" />
+		<property name="link" value="" />
+	</bean>
+	
+	<bean id="duty06" class="acme.entities.duties.Duty">
+		<property name="officer" ref="officerOfficer1" />
+		<property name="title" value="A duty" />
+		<property name="description" value="Finished and public" />
+		<property name="executionStart" value="2021/12/02 14:46" />
+		<property name="executionEnd" value="2021/12/03 14:46" />
+		<property name="workload" value="02:01" />
+		<property name="isPublic" value="true" />
+		<property name="link" value="" />
+	</bean>
+	
+	<bean id="duty07" class="acme.entities.duties.Duty">
+		<property name="officer" ref="officerOfficer" />
+		<property name="title" value="Another duty" />
+		<property name="description" value="Non-finished and public" />
+		<property name="executionStart" value="2021/12/10 12:30" />
+		<property name="executionEnd" value="2021/12/14 18:45" />
+		<property name="workload" value="00:30" />
+		<property name="isPublic" value="true" />
+		<property name="link" value="" />
+	</bean>
 
 	<!-- endeavour -->
 
 	<bean id="endeavour01" class="acme.entities.endeavours.Endeavour">
+		<property name="officer" ref="officerOfficer" />
+		<property name="executionStart" value="2021/12/01 08:00" />
+		<property name="executionEnd" value="2021/12/30 17:00" />
+		<property name="duties">
+			<list>
+				<ref bean="duty05" />
+				<ref bean="duty06" />
+			</list>
+		</property>
+		<property name="isPublic" value="true" />
+	</bean>
+	
+	<bean id="endeavour02" class="acme.entities.endeavours.Endeavour">
 		<property name="officer" ref="officerOfficer" />
 		<property name="executionStart" value="2020/10/01 14:46" />
 		<property name="executionEnd" value="2022/10/02 14:46" />

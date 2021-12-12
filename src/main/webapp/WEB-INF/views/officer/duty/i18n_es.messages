@@ -21,6 +21,8 @@ officer.duty.list.label.public = Publico
  officer.duty.form.button.update = Guardar
 officer.duty.form.button.create = Crear
 officer.duty.form.button.delete = Borrar
+
+officer.duty.form.error.publicrestriction = Este deber forma parte de un esfuerzo publico
  
 authenticated.duty.list.label.title = Titulo
 authenticated.duty.list.label.description = Descripcion 

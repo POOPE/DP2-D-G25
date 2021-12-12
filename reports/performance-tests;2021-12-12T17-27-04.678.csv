@@ -1,0 +1,3 @@
+timestamp,test-class,test-method,time,description,result
+2021-12-12 17:27:44.667,acme.testing.anonymous.duty.AnonymousDutyShowTest,anonymousTaskShow,14369,"[1] recordIndex=0, title=A duty, description=In the future, executionStart=2022/01/11 14:46, executionEnd=2022/01/15 14:46, link=http://www.sample-app.com, workload=18:59, isPublic=true",Cannot find 'By.name: workloadParsed'
+2021-12-12 17:27:56.981,acme.testing.anonymous.duty.AnonymousDutyShowTest,anonymousTaskShow,11897,"[2] recordIndex=1, title=A duty, description=Non-finished and public, executionStart=2021/12/12 14:46, executionEnd=2021/12/15 14:46, link=null, workload=4:21, isPublic=true",Cannot find 'By.name: workloadParsed'

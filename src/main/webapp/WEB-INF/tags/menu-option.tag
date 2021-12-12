@@ -21,6 +21,7 @@
 <%@attribute name="code" required="true" type="java.lang.String"%>
 <%@attribute name="action" required="false" type="java.lang.String"%>
 <%@attribute name="access" required="false" type="java.lang.String"%>
+<%@attribute name="id" required="false" type="java.lang.String"%>
 
 <jstl:if test="${action == null}">
 	<jstl:set var="action" value="#"/>
@@ -30,13 +31,20 @@
 	<jstl:set var="access" value="true"/>
 </jstl:if>
 
+<jstl:if test="${not empty id}">
+	<jstl:set var="addId" value="true"/>
+</jstl:if>
+<jstl:if test="${empty id}">
+	<jstl:set var="addId" value="false"/>
+</jstl:if>
+
 <security:authorize access="${access}">
 	<jsp:doBody var="body"/>
 	<jstl:set var="hasBody" value="${!body.trim().equals('')}"/>	
 	<jstl:choose>
 		<jstl:when test="${hasBody}">
 			<li class="nav-item dropdown">
-				<a href="javascript: clearReturnUrl(); redirect('${action}')" class="nav-link dropdown-toggle" data-toggle="dropdown">
+				<a id="${addId ? id : ''}" href="javascript: clearReturnUrl(); redirect('${action}')" class="nav-link dropdown-toggle" data-toggle="dropdown">
 					<acme:message code="${code}"/> 
 				</a>
 				<div class="dropdown-menu ${__acme_menu_alignment}">
@@ -46,7 +54,7 @@
 		</jstl:when>
 		<jstl:otherwise>
 			<li class="${nav-item}">
-				<a href="javascript: clearReturnUrl(); redirect('${action}')" class="nav-link">
+				<a id="{addId ? id : ''}" href="javascript: clearReturnUrl(); redirect('${action}')" class="nav-link">
 					<acme:message code="${code}"/> 
 				</a>
 			</li>

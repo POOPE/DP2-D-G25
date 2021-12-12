@@ -249,6 +249,7 @@ public abstract class AcmeTest extends AbstractTest {
 		} catch (final Throwable oops) {
 			// INFO: Can silently ignore the exception here.
 			// INFO+ Sometimes, the toggle gets stale unexpectedly.
+			//oops.printStackTrace();
 		}
 
 		headerLocator = By.xpath(String.format("//div[@id='mainMenu']/ul/li/a[normalize-space()='%s']", header));
@@ -261,6 +262,7 @@ public abstract class AcmeTest extends AbstractTest {
 				// INFO: Can silently ignore the exception here.
 				// INFO+ Sometimes, the toggle gets stale unexpectedly
 				// INFO+ and that has an impact on the main menu.
+				//oops.printStackTrace();
 			} 
 			optionLocator = By.xpath(String.format("//div[@id='mainMenu']/ul/li[a[normalize-space()='%s']]/div[contains(@class, 'dropdown-menu')]/a[normalize-space()='%s']", header, option));
 			super.clickAndWait(optionLocator);

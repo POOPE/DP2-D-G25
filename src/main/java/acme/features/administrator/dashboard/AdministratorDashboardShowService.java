@@ -27,9 +27,11 @@ public class AdministratorDashboardShowService implements AbstractShowService<Ad
 	// Internal state ---------------------------------------------------------
 
 	@Autowired
-	protected AdministratorDashboardRepository repository;
+	protected AdministratorDashboardRepository	repository;
 
 	// AbstractShowService<Administrator, Dashboard> interface ----------------
+
+	private Dashboard							dash;
 
 
 	@Override
@@ -53,79 +55,139 @@ public class AdministratorDashboardShowService implements AbstractShowService<Ad
 	@Override
 	public Dashboard findOne(final Request<Dashboard> request) {
 		assert request != null;
+		this.setDutyStats();
+		this.setEndeavourStats();
 
-		// Task information
-		final Dashboard result = new Dashboard();
-		
-		result.setCountPublicDuties(this.repository.countPublicDuties().toString());
-		result.setCountPrivateDuties(this.repository.countPrivateDuties().toString());
-		
-		//duty execution period
-		Double avgDutyExecutionPeriod = this.repository.avgDutyExecutionPeriod();
-		if ( avgDutyExecutionPeriod != null) {
-			avgDutyExecutionPeriod=avgDutyExecutionPeriod/(60);
-			result.setAvgDutyExecutionPeriod(this.secondsToDaysAndHours(avgDutyExecutionPeriod));
-		} else {
-			result.setAvgDutyExecutionPeriod("N/A");
-		}
-		Double stddevDutyExecutionPeriod = this.repository.stddevDutyExecutionPeriod();
-		if (stddevDutyExecutionPeriod != null) {
-			stddevDutyExecutionPeriod=stddevDutyExecutionPeriod/(60);
-			result.setStddevDutyExecutionPeriod(this.secondsToDaysAndHours(stddevDutyExecutionPeriod));
-		} else {
-			result.setStddevDutyExecutionPeriod("N/A");
-		}
-		Double minDutyExecutionPeriod = this.repository.minDutyExecutionPeriod();
-		if (minDutyExecutionPeriod != null) {
-			minDutyExecutionPeriod=minDutyExecutionPeriod/(60);
-			result.setMinDutyExecutionPeriod(this.secondsToDaysAndHours(minDutyExecutionPeriod));
-		} else {
-			result.setMinDutyExecutionPeriod("N/A");
-		}
-		Double maxDutyExecutionPeriod = this.repository.maxDutyExecutionPeriod();
-		if (maxDutyExecutionPeriod != null) {
-			maxDutyExecutionPeriod=maxDutyExecutionPeriod/(60);
-			result.setMaxDutyExecutionPeriod(this.secondsToDaysAndHours(maxDutyExecutionPeriod));
-		} else {
-			result.setMaxDutyExecutionPeriod("N/A");
-		}
-		
-		
-		//duty workload
-		final Double avgDutyWorkload = this.repository.avgDutyWorkload();
-		if ( avgDutyWorkload != null) {
-			result.setAvgDutyWorkload(this.minutesToHoursAndMinutes(avgDutyWorkload));
-		} else {
-			result.setAvgDutyWorkload("N/A");
-		}
-		final Double stddevDutyWorkload = this.repository.stddevDutyWorkload();
-		if ( avgDutyWorkload != null) {
-			result.setStddevDutyWorkload(this.minutesToHoursAndMinutes(stddevDutyWorkload));
-		} else {
-			result.setStddevDutyWorkload("N/A");
-		}
-		final Double minDutyWorkload = this.repository.minDutyWorkload();
-		if ( avgDutyWorkload != null) {
-			result.setMinDutyWorkload(this.minutesToHoursAndMinutes(minDutyWorkload));
-		} else {
-			result.setMinDutyWorkload("N/A");
-		}
-		final Double maxDutyWorkload = this.repository.maxDutyWorkload();
-		if ( avgDutyWorkload != null) {
-			result.setMaxDutyWorkload(this.minutesToHoursAndMinutes(maxDutyWorkload));
-		} else {
-			result.setMaxDutyWorkload("N/A");
-		}
-
-		return result;
+		return this.dash;
 	}
 
 	public String secondsToDaysAndHours(final Double time) {
-		return ((int)(time / 24 / 60 )) + "d " + ((int)(time / 60 % 24)) + "hrs";
+		return ((int) (time / 24 / 60)) + "d " + ((int) (time / 60 % 24)) + "hrs";
 	}
-	
+
 	public String minutesToHoursAndMinutes(final Double time) {
-		return ((int)(time / 60 )) + ":" + ((int)(time % 60  ));
+		return ((int) (time / 60)) + ":" + ((int) (time % 60));
+	}
+
+	private void setEndeavourStats() {
+		//duty execution period
+		Double avgEndeavourExecutionPeriod = this.repository.avgEndeavourExecutionPeriod();
+		if (avgEndeavourExecutionPeriod != null) {
+			avgEndeavourExecutionPeriod = avgEndeavourExecutionPeriod / (60);
+			this.dash.setAvgEndeavourExecutionPeriod(this.secondsToDaysAndHours(avgEndeavourExecutionPeriod));
+		} else {
+			this.dash.setAvgEndeavourExecutionPeriod("N/A");
+		}
+		Double stddevEndeavourExecutionPeriod = this.repository.stddevEndeavourExecutionPeriod();
+		if (stddevEndeavourExecutionPeriod != null) {
+			stddevEndeavourExecutionPeriod = stddevEndeavourExecutionPeriod / (60);
+			this.dash.setStddevEndeavourExecutionPeriod(this.secondsToDaysAndHours(stddevEndeavourExecutionPeriod));
+		} else {
+			this.dash.setStddevEndeavourExecutionPeriod("N/A");
+		}
+		Double minEndeavourExecutionPeriod = this.repository.minEndeavourExecutionPeriod();
+		if (minEndeavourExecutionPeriod != null) {
+			minEndeavourExecutionPeriod = minEndeavourExecutionPeriod / (60);
+			this.dash.setMinEndeavourExecutionPeriod(this.secondsToDaysAndHours(minEndeavourExecutionPeriod));
+		} else {
+			this.dash.setMinEndeavourExecutionPeriod("N/A");
+		}
+		Double maxEndeavourExecutionPeriod = this.repository.maxEndeavourExecutionPeriod();
+		if (maxEndeavourExecutionPeriod != null) {
+			maxEndeavourExecutionPeriod = maxEndeavourExecutionPeriod / (60);
+			this.dash.setMaxEndeavourExecutionPeriod(this.secondsToDaysAndHours(maxEndeavourExecutionPeriod));
+		} else {
+			this.dash.setMaxEndeavourExecutionPeriod("N/A");
+		}
+		//endeavour workload
+		final Double avgEndeavourWorkload = this.repository.avgEndeavourWorkload();
+		if (avgEndeavourWorkload != null) {
+			this.dash.setAvgEndeavourWorkload(this.minutesToHoursAndMinutes(avgEndeavourWorkload));
+		} else {
+			this.dash.setAvgEndeavourWorkload("N/A");
+		}
+		final Double stddevEndeavourWorkload = this.repository.stddevEndeavourWorkload();
+		if (stddevEndeavourWorkload != null) {
+			this.dash.setStddevEndeavourWorkload(this.minutesToHoursAndMinutes(stddevEndeavourWorkload));
+		} else {
+			this.dash.setStddevEndeavourWorkload("N/A");
+		}
+		final Double minEndeavourWorkload = this.repository.minEndeavourWorkload();
+		if (minEndeavourWorkload != null) {
+			this.dash.setMinEndeavourWorkload(this.minutesToHoursAndMinutes(minEndeavourWorkload));
+		} else {
+			this.dash.setMinEndeavourWorkload("N/A");
+		}
+		final Double maxEndeavourWorkload = this.repository.maxEndeavourWorkload();
+		if (maxEndeavourWorkload != null) {
+			this.dash.setMaxEndeavourWorkload(this.minutesToHoursAndMinutes(maxEndeavourWorkload));
+		} else {
+			this.dash.setMaxEndeavourWorkload("N/A");
+		}
+	}
+
+	private void setDutyStats() {
+		// Duty information
+		this.dash = new Dashboard();
+
+		this.dash.setCountPublicDuties(this.repository.countPublicDuties().toString());
+		this.dash.setCountPrivateDuties(this.repository.countPrivateDuties().toString());
+
+		//duty execution period
+		Double avgDutyExecutionPeriod = this.repository.avgDutyExecutionPeriod();
+		if (avgDutyExecutionPeriod != null) {
+			avgDutyExecutionPeriod = avgDutyExecutionPeriod / (60);
+			this.dash.setAvgDutyExecutionPeriod(this.secondsToDaysAndHours(avgDutyExecutionPeriod));
+		} else {
+			this.dash.setAvgDutyExecutionPeriod("N/A");
+		}
+		Double stddevDutyExecutionPeriod = this.repository.stddevDutyExecutionPeriod();
+		if (stddevDutyExecutionPeriod != null) {
+			stddevDutyExecutionPeriod = stddevDutyExecutionPeriod / (60);
+			this.dash.setStddevDutyExecutionPeriod(this.secondsToDaysAndHours(stddevDutyExecutionPeriod));
+		} else {
+			this.dash.setStddevDutyExecutionPeriod("N/A");
+		}
+		Double minDutyExecutionPeriod = this.repository.minDutyExecutionPeriod();
+		if (minDutyExecutionPeriod != null) {
+			minDutyExecutionPeriod = minDutyExecutionPeriod / (60);
+			this.dash.setMinDutyExecutionPeriod(this.secondsToDaysAndHours(minDutyExecutionPeriod));
+		} else {
+			this.dash.setMinDutyExecutionPeriod("N/A");
+		}
+		Double maxDutyExecutionPeriod = this.repository.maxDutyExecutionPeriod();
+		if (maxDutyExecutionPeriod != null) {
+			maxDutyExecutionPeriod = maxDutyExecutionPeriod / (60);
+			this.dash.setMaxDutyExecutionPeriod(this.secondsToDaysAndHours(maxDutyExecutionPeriod));
+		} else {
+			this.dash.setMaxDutyExecutionPeriod("N/A");
+		}
+
+		//duty workload
+		final Double avgDutyWorkload = this.repository.avgDutyWorkload();
+		if (avgDutyWorkload != null) {
+			this.dash.setAvgDutyWorkload(this.minutesToHoursAndMinutes(avgDutyWorkload));
+		} else {
+			this.dash.setAvgDutyWorkload("N/A");
+		}
+		final Double stddevDutyWorkload = this.repository.stddevDutyWorkload();
+		if (stddevDutyWorkload != null) {
+			this.dash.setStddevDutyWorkload(this.minutesToHoursAndMinutes(stddevDutyWorkload));
+		} else {
+			this.dash.setStddevDutyWorkload("N/A");
+		}
+		final Double minDutyWorkload = this.repository.minDutyWorkload();
+		if (minDutyWorkload != null) {
+			this.dash.setMinDutyWorkload(this.minutesToHoursAndMinutes(minDutyWorkload));
+		} else {
+			this.dash.setMinDutyWorkload("N/A");
+		}
+		final Double maxDutyWorkload = this.repository.maxDutyWorkload();
+		if (maxDutyWorkload != null) {
+			this.dash.setMaxDutyWorkload(this.minutesToHoursAndMinutes(maxDutyWorkload));
+		} else {
+			this.dash.setMaxDutyWorkload("N/A");
+		}
 	}
 
 }

@@ -1,0 +1,14 @@
+timestamp,simple-path,time
+2021-12-12 17:27:18.294,/master/welcome,7541
+2021-12-12 17:27:22.034,/master/sign-in,3003
+2021-12-12 17:27:26.421,/master/welcome,998
+2021-12-12 17:27:27.339,/master/welcome,667
+2021-12-12 17:27:28.186,/master/welcome,664
+2021-12-12 17:27:30.295,/master/welcome,1533
+2021-12-12 17:27:31.242,/master/welcome,898
+2021-12-12 17:27:32.997,/anonymous/duty/list,1593
+2021-12-12 17:27:34.343,/anonymous/duty/show,1114
+2021-12-12 17:27:45.083,/master/welcome,363
+2021-12-12 17:27:45.435,/master/welcome,332
+2021-12-12 17:27:46.067,/anonymous/duty/list,559
+2021-12-12 17:27:46.721,/anonymous/duty/show,559

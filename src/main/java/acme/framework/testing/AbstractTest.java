@@ -126,7 +126,7 @@ public abstract class AbstractTest {
 	protected void beforeAll() {
 		this.options = new FirefoxOptions();
 		this.options.setHeadless(this.headless);
-		this.options.setPageLoadStrategy(PageLoadStrategy.NORMAL);
+		this.options.setPageLoadStrategy(PageLoadStrategy.EAGER);
 		this.options.setAcceptInsecureCerts(true);
 
 		this.driver = new FirefoxDriver(this.options);

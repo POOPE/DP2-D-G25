@@ -27,6 +27,7 @@ import acme.framework.components.Errors;
 import acme.framework.components.Model;
 import acme.framework.components.Request;
 import acme.framework.components.Response;
+import acme.framework.helpers.MessageHelper;
 import acme.framework.helpers.PrincipalHelper;
 import acme.framework.services.AbstractUpdateService;
 
@@ -65,7 +66,7 @@ public class OfficerEndeavourUpdateService extends SpamFilterService<Officer, En
 		assert entity != null;
 		assert model != null;
 
-		request.unbind(entity, model, "executionStart", "executionEnd", "isPublic");
+		request.unbind(entity, model, "executionStart", "executionEnd");
 
 	}
 
@@ -122,8 +123,8 @@ public class OfficerEndeavourUpdateService extends SpamFilterService<Officer, En
 				});
 				Assert.isTrue(!publicRestriction, "Public endeavours cannot have private duties");
 			} catch (final Exception e) {
-				final String message = request.getLocale().getLanguage().equals("es") ? "Un esfuerzo publico puede contener deberes privados" : "Private duties are not allowed for public endeavours";
-				errors.add("duties", message);
+				final String errorMsg = MessageHelper.getMessage("officer.endeavour.form.error.duty.publicrestriction");
+				errors.add("duties", errorMsg);
 			}
 
 			//execution period
@@ -135,8 +136,8 @@ public class OfficerEndeavourUpdateService extends SpamFilterService<Officer, En
 					Assert.isTrue(entity.getExecutionStart().isBefore(dutyExecutionPeriodStart.get()) && entity.getExecutionEnd().isAfter(dutyExecutionPeriodEnd.get()), "Duties do not fit within given endeavour execution period");
 				}
 			} catch (final Exception e) {
-				final String message = request.getLocale().getLanguage().equals("es") ? "Los deberes no caben en el periodo del esfuerzo" : "Duties do not fit inside the execution period";
-				errors.add("duties", message);
+				final String errorMsg = MessageHelper.getMessage("officer.endeavour.form.error.duty.executionperiod");
+				errors.add("duties", errorMsg);
 			}
 
 			if (!errors.hasErrors()) {
@@ -153,23 +154,21 @@ public class OfficerEndeavourUpdateService extends SpamFilterService<Officer, En
 	@Override
 	public void onFailure(final Request<Endeavour> request, final Response<Endeavour> response, final Throwable oops) {
 		AbstractUpdateService.super.onFailure(request, response, oops);
-
-		final Optional<Endeavour> endeavour = this.repo.findById(Integer.valueOf((String)request.getModel().getAttribute("id")));
+		final Optional<Endeavour> endeavour = this.repo.findById(Integer.valueOf((String) request.getModel().getAttribute("id")));
 		if (endeavour.isPresent()) {
 			final List<Duty> duties = endeavour.get().getDuties();
-			duties.removeAll(endeavour.get().getDuties().stream().filter(Duty::getIsPublic).collect(Collectors.toList()));
+			final List<Duty> available = this.dutyRepo.findAll(Duty.canBeAddedToEndeavour(endeavour.get().getIsPublic()));
+			available.removeAll(duties);
+			
 			response.getModel().setAttribute("binded_duties", this.mapper.map(duties, new TypeToken<List<DutyDto>>() {
 			}.getType()));
-			
-			final List<Duty> available = this.dutyRepo.findAll(Duty.isPublic(true));
-			available.removeAll(duties);
-			response.getModel().setAttribute("available_duties", available);
+			response.getModel().setAttribute("available_duties", this.mapper.map(duties, new TypeToken<List<DutyDto>>() {
+			}.getType()));
 		} else {
 			response.getModel().setAttribute("available_duties", this.mapper.map(this.dutyRepo.findAll(Duty.canBeAddedToEndeavour(true)), new TypeToken<List<DutyDto>>() {
 			}.getType()));
 			response.getModel().setAttribute("binded_duties", new ArrayList<DutyDto>());
 		}
-		
 	}
 
 }

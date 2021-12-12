@@ -54,7 +54,7 @@ public class AnonymousEndeavourListService implements AbstractListService<Anonym
 	public Collection<Endeavour> findMany(final Request<Endeavour> request) {
 		assert request != null;
 
-		return this.repository.findAll(Endeavour.isPublicAndNotFinished());
+		return this.repository.findAll(Endeavour.isPublic(true).and(Endeavour.isFinished(false)));
 	}
 
 }

@@ -42,12 +42,26 @@ public class Dashboard implements Serializable {
 	String						stddevDutyWorkload;
 	String						minDutyWorkload;
 	String						maxDutyWorkload;
+	
+	
+	String						countEndeavours;
+	String						countPublicEndeavours;
+	String						countPrivateEndeavours;
+	
+	String						countFinishedEndeavours;
+	String						countUnfinishedEndeavours;
+	
+	
 
-	// september
-//	String						foletImportantRatio;
-//	String						foletZeroBudgetRatio;
-//	Map<String,String> 				foletAvgBudget;
-//	Map<String,String>				foletStddevBudget;
+	String						avgEndeavourExecutionPeriod;
+	String						stddevEndeavourExecutionPeriod;
+	String						minEndeavourExecutionPeriod;
+	String						maxEndeavourExecutionPeriod;
+
+	String						avgEndeavourWorkload;
+	String						stddevEndeavourWorkload;
+	String						minEndeavourWorkload;
+	String						maxEndeavourWorkload;
 
 	// Derived attributes -----------------------------------------------------
 

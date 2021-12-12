@@ -21,24 +21,21 @@
 
 <acme:menu-bar code="master.menu.home">
 	<acme:menu-left>
-		<%-- 		<acme:menu-option code="master.menu.anonymous" access="isAnonymous()"> --%>
-		<%-- 			<acme:menu-suboption code="master.menu.anonymous.jbn-favourite-link" action="https://www.youtube.com/watch?v=i5cpPukfCZ0"/> --%>
-		<%-- 		</acme:menu-option> --%>
 
-		<acme:menu-option code="master.menu.shout" access="isAnonymous()">
-			<acme:menu-suboption code="master.menu.anonymous.shout.create"
+		<acme:menu-option id="anon_shout_option" code="master.menu.shout" access="isAnonymous()">
+			<acme:menu-suboption id="anon_shout_create" code="master.menu.anonymous.shout.create"
 				action="/anonymous/shout/create" />
-			<acme:menu-suboption code="master.menu.anonymous.shout.list"
+			<acme:menu-suboption id="anon_shout_list" code="master.menu.anonymous.shout.list"
 				action="/anonymous/shout/list" />
 		</acme:menu-option>
 
-		<acme:menu-option code="master.menu.duty" access="isAnonymous()">
-			<acme:menu-suboption code="master.menu.anonymous.duty.list"
+		<acme:menu-option id="anon_duty_option" code="master.menu.duty" access="isAnonymous()">
+			<acme:menu-suboption id="anon_duty_list" code="master.menu.anonymous.duty.list"
 				action="/anonymous/duty/list" />
 		</acme:menu-option>
 
-		<acme:menu-option code="master.menu.duty" access="isAuthenticated()">
-			<acme:menu-suboption code="master.menu.anonymous.duty.list"
+		<acme:menu-option id="auth_duty_option" code="master.menu.duty" access="isAuthenticated()">
+			<acme:menu-suboption id="auth_duty_list" code="master.menu.anonymous.duty.list"
 				action="/authenticated/duty/list" />
 			<security:authorize access="hasRole('Officer')">
 				<acme:menu-separator />
@@ -49,16 +46,16 @@
 			</security:authorize>
 		</acme:menu-option>
 		
-		<acme:menu-option code="master.menu.endeavour">
+		<acme:menu-option code="master.menu.endeavour" access="isAnonymous()">
 			<acme:menu-suboption code="master.menu.anonymous.endeavour.list"
-				action="/anonymous/endeavour/list" access="isAnonymous()"/>
-			<security:authorize access="hasRole('Officer')">
-				<acme:menu-separator />
+				action="/anonymous/endeavour/list" />
+		</acme:menu-option>
+		
+		<acme:menu-option code="master.menu.endeavour" access="hasRole('Officer')">
 				<acme:menu-suboption code="master.menu.officer.endeavour.list"
 					action="/officer/endeavour/list_mine" />
 				<acme:menu-suboption code="master.menu.officer.endeavour.create"
 					action="/officer/endeavour/create" />
-			</security:authorize>
 		</acme:menu-option>
 
 
@@ -82,17 +79,6 @@
 				action="/master/shutdown" />
 		</acme:menu-option>
 
-		<acme:menu-option code="master.menu.provider"
-			access="hasRole('Provider')">
-			<acme:menu-suboption code="master.menu.provider.favourite-link"
-				action="http://www.example.com/" />
-		</acme:menu-option>
-
-		<acme:menu-option code="master.menu.consumer"
-			access="hasRole('Consumer')">
-			<acme:menu-suboption code="master.menu.consumer.favourite-link"
-				action="http://www.example.com/" />
-		</acme:menu-option>
 	</acme:menu-left>
 
 	<acme:menu-right>
