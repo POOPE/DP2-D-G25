@@ -18,6 +18,10 @@ officer.duty.form.button.return = Return
 officer.duty.form.label.public = Public
 officer.duty.list.label.public = Public
 
+officer.duty.form.label.error.executionstart.future = Must be in the future
+officer.duty.form.label.error.executionend.future = Must be in the future
+officer.duty.form.label.error.execution.inconsistency = End date must be after start date
+
 officer.duty.form.button.update = Save
 officer.duty.form.button.create = Create
 officer.duty.form.button.delete = Delete

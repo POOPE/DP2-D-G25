@@ -1,10 +1,12 @@
 
 package acme.features.officer.duty;
 
+import java.time.LocalDateTime;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.Assert;
 
 import acme.entities.duties.Duty;
 import acme.entities.roles.Officer;
@@ -13,16 +15,17 @@ import acme.features.spamfilter.SpamFilterService;
 import acme.framework.components.Errors;
 import acme.framework.components.Model;
 import acme.framework.components.Request;
+import acme.framework.helpers.MessageHelper;
 import acme.framework.services.AbstractCreateService;
 
 @Service
 public class OfficerDutyCreateService extends SpamFilterService<Officer, Duty> implements AbstractCreateService<Officer, Duty> {
 
 	@Autowired
-	private OfficerDutyRepository	repo;
+	private OfficerDutyRepository			repo;
 
 	@Autowired
-	private AuthenticatedOfficerRepository		officerRepo;
+	private AuthenticatedOfficerRepository	officerRepo;
 
 
 	@Override
@@ -38,7 +41,7 @@ public class OfficerDutyCreateService extends SpamFilterService<Officer, Duty> i
 		assert entity != null;
 		assert model != null;
 
-		request.unbind(entity, model, "title", "description", "executionStart", "executionEnd", "workload", "link","isPublic");
+		request.unbind(entity, model, "title", "description", "executionStart", "executionEnd", "workload", "link", "isPublic");
 
 	}
 
@@ -67,7 +70,27 @@ public class OfficerDutyCreateService extends SpamFilterService<Officer, Duty> i
 
 	@Override
 	public void validateAndFilter(final Request<Duty> request, final Duty entity, final Errors errors) {
-		//do nothing
+
+		try {
+			Assert.isTrue(entity.getExecutionStart().isAfter(LocalDateTime.now()),"Execution start date has to be in the futre");
+		} catch (final Exception e) {
+			final String errorMsg = MessageHelper.getMessage("officer.duty.form.label.error.executionstart.future");
+			errors.add("executionStart", errorMsg);
+		}
+
+		try {
+			Assert.isTrue(entity.getExecutionEnd().isAfter(LocalDateTime.now()),"Execution start date has to be in the futre");
+		} catch (final Exception e) {
+			final String errorMsg = MessageHelper.getMessage("officer.duty.form.label.error.executionend.future");
+			errors.add("executionEnd", errorMsg);
+		}
+
+		try {
+			Assert.isTrue(entity.getExecutionEnd().isAfter(entity.getExecutionStart()),"Execution start after execution end");
+		} catch (final Exception e) {
+			final String errorMsg = MessageHelper.getMessage("officer.duty.form.label.error.execution.inconsistency");
+			errors.add("executionEnd", errorMsg);
+		}
 	}
 
 }
