@@ -1,4 +1,0 @@
-recordIndex,title,description,executionStart,executionEnd,link,workload,isPublic
-0,A duty,In the future,2022/01/11 14:46,2022/01/15 14:46,http://www.sample-app.com,18:59,true
-1,A duty,Non-finished and public,2021/12/12 14:46,2021/12/15 14:46,,4:21,true
-2,Another duty,Non-finished and public,2021/12/10 12:30,2021/12/14 18:45,,0:30,true

@@ -1,5 +1,0 @@
-recordIndex,executionStart,executionEnd,duties,suggest
-0,2021/12/01 08:00,2021/12/30 17:00,duty_18,false
-1,,,"duty_19,duty_20",true
-2,2020/12/01 08:00,2022/12/30 17:00,"duty_21,duty_22,duty_23",false
-3,,,"duty_24,duty_18,duty_19",true
