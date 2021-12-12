@@ -22,6 +22,8 @@ officer.endeavour.form.button.return = Return
 officer.endeavour.form.error.duty.publicrestriction = Private duties not allowed for a public endeavour
 officer.endeavour.form.error.duty.executionperiod = Duties do not fit in given execution period
 
+officer.endeavour.form.label.error.execution.inconsistency = End date must be after start date
+
 officer.endeavour.form.button.add = Save & publish
 officer.endeavour.form.button.update = Save
 officer.endeavour.form.button.create = Create

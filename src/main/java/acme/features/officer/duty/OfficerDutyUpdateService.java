@@ -1,11 +1,13 @@
 
 package acme.features.officer.duty;
 
+import java.time.LocalDateTime;
 import java.util.Optional;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.Assert;
 
 import acme.entities.duties.Duty;
 import acme.entities.endeavours.Endeavour;
@@ -81,6 +83,27 @@ public class OfficerDutyUpdateService extends SpamFilterService<Officer, Duty> i
 		if (Boolean.FALSE.equals(entity.getIsPublic()) && this.endeavourRepo.findAll(Endeavour.withDuty(entity.getId())).stream().anyMatch(e -> e.getIsPublic())) {
 			final String errorMsg = MessageHelper.getMessage("officer.duty.form.error.publicrestriction");
 			errors.add("duties", errorMsg);
+		}
+		
+		try {
+			Assert.isTrue(entity.getExecutionStart().isAfter(LocalDateTime.now()),"Execution start date has to be in the futre");
+		} catch (final Exception e) {
+			final String errorMsg = MessageHelper.getMessage("officer.duty.form.label.error.executionstart.future");
+			errors.add("executionStart", errorMsg);
+		}
+
+		try {
+			Assert.isTrue(entity.getExecutionEnd().isAfter(LocalDateTime.now()),"Execution start date has to be in the futre");
+		} catch (final Exception e) {
+			final String errorMsg = MessageHelper.getMessage("officer.duty.form.label.error.executionend.future");
+			errors.add("executionEnd", errorMsg);
+		}
+
+		try {
+			Assert.isTrue(entity.getExecutionEnd().isAfter(entity.getExecutionStart()),"Execution start after execution end");
+		} catch (final Exception e) {
+			final String errorMsg = MessageHelper.getMessage("officer.duty.form.label.error.execution.inconsistency");
+			errors.add("executionEnd", errorMsg);
 		}
 	}
 

@@ -36,6 +36,8 @@ officer.endeavour.list.label.executionend = Fin
 officer.endeavour.list.label.workload = Carga
 officer.endeavour.list.label.link =  Link
 
+officer.endeavour.form.label.error.execution.inconsistency = Fecha fin debe ser despues de la fecha de inicio
+
 officer.endeavour.form.label.moment = Fecha
 officer.endeavour.form.label.money = Precio
 officer.endeavour.form.label.important =  Importante
