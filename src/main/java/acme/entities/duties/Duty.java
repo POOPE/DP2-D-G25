@@ -11,7 +11,6 @@ import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 import javax.validation.Valid;
-import javax.validation.constraints.Future;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
@@ -44,10 +43,8 @@ public class Duty extends DomainEntity {
 	@Length(max = 500)
 	private String				description;
 	@NotNull
-	@Future
 	private LocalDateTime		executionStart;
 	@NotNull
-	@Future
 	private LocalDateTime		executionEnd;
 	@NotNull
 	@Valid

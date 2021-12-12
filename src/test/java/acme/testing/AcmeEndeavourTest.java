@@ -17,31 +17,43 @@ public abstract class AcmeEndeavourTest extends AcmeTest {
 	//defaults are 20 and 50
 	public static int		SHORT_SLEEP		= 9;
 	public static int		LONG_SLEEP		= 20;
-	public static boolean	SKIP_POPULATE	= true;
+	public static boolean	SKIP_POPULATE	= false;
 
 
 	@Override
 	@BeforeAll
 	public void beforeAll() {
+		this.setSettings();
+		if (!AcmeEndeavourTest.SKIP_POPULATE) {
+			this.populateSamples();
+		}
+	}
+	
+	public void setSettings() {
 		super.setAutoPausing(false);
-		super.setDefaultTimeout(10);
+		super.setDefaultTimeout(14);
 		super.setHeadless(false);
 		super.beforeAll();
 
 		super.setBaseCamp("http", "localhost", "8080", "/Acme-Endeavours", "/master/welcome", "?language=en&debug=true");
-
-		if (!AcmeEndeavourTest.SKIP_POPULATE) {
+		
+	}
+	
+	public void populateSamples() {	
 			this.navigateHome();
 			this.signIn("administrator", "administrator");
 			super.clickOnMenu("Administrator", "Populate DB (samples)");
 			this.checkAlertExists(true);
 			this.signOut();
-		}else {
-			//just for testing
-			this.signIn("administrator", "administrator");
-			this.signOut();
-		}
 	}
+	
+	public void populateInitial() {	
+		this.navigateHome();
+		this.signIn("administrator", "administrator");
+		super.clickOnMenu("Administrator", "Populate DB (initial)");
+		this.checkAlertExists(true);
+		this.signOut();
+}
 
 
 	protected void signIn(final String username, final String password) {
@@ -131,46 +143,72 @@ public abstract class AcmeEndeavourTest extends AcmeTest {
 		this.sleep(AcmeEndeavourTest.LONG_SLEEP, false);
 	}
 	
-//
-//	public void clickOnMenuById(final String headerId, final String optionId) {
-//		assert !StringHelper.isBlank(headerId);
-//		assert optionId == null || !StringHelper.isBlank(optionId);
-//
-//		By toggleLocator, headerLocator, optionLocator;
-//		WebElement toggle;
-//		String ariaExpanded;
-//
-//		try {
-//			toggleLocator = By.xpath("//button[@class='navbar-toggler']");
-//			toggle = super.locateOne(toggleLocator);
-//			if (toggle.isDisplayed()) {
-//				ariaExpanded = toggle.getAttribute("aria-expanded");
-//				if (ariaExpanded == null)
-//					super.clickAndGo(toggle);
-//			}
-//		} catch (final Throwable oops) {
-//			// INFO: Can silently ignore the exception here.
-//			// INFO+ Sometimes, the toggle gets stale unexpectedly.
-//			//oops.printStackTrace();
-//		}
-//
-//		headerLocator = By.xpath(String.format("//a[@id='%s']", headerId));
-//		if (optionId == null)
-//			super.clickAndWait(headerLocator);
-//		else {
-//			try {
-//				super.clickAndGo(headerLocator);
-//			} catch (final Throwable oops) {
-//				// INFO: Can silently ignore the exception here.
-//				// INFO+ Sometimes, the toggle gets stale unexpectedly
-//				// INFO+ and that has an impact on the main menu.
-//				//oops.printStackTrace();
-//			} 
-//			optionLocator = By.xpath(String.format("//a[@id='%s']", optionId));
-//			super.clickAndWait(optionLocator);
-//		}
-//	}
+	
+	protected void clickOnMenuFast(final String header, final String option) {
+		assert !StringHelper.isBlank(header);
+		assert option == null || !StringHelper.isBlank(option);
+
+		By toggleLocator, headerLocator, optionLocator;
+		WebElement toggle;
+		String ariaExpanded;
+
+		try {
+			toggleLocator = By.xpath("//button[@class='navbar-toggler']");
+			toggle = super.locateOne(toggleLocator);
+			if (toggle.isDisplayed()) {
+				ariaExpanded = toggle.getAttribute("aria-expanded");
+				if (ariaExpanded == null)
+					this.clickFast(toggle);
+			}
+		} catch (final Throwable oops) {
+			// INFO: Can silently ignore the exception here.
+			// INFO+ Sometimes, the toggle gets stale unexpectedly.
+			//oops.printStackTrace();
+		}
+
+		headerLocator = By.xpath(String.format("//div[@id='mainMenu']/ul/li/a[normalize-space()='%s']", header));
+		if (option == null)
+			super.clickAndGo(headerLocator);
+		else {
+			try {
+				this.clickFast(headerLocator);
+			} catch (final Throwable oops) {
+				// INFO: Can silently ignore the exception here.
+				// INFO+ Sometimes, the toggle gets stale unexpectedly
+				// INFO+ and that has an impact on the main menu.
+				//oops.printStackTrace();
+			} 
+			optionLocator = By.xpath(String.format("//div[@id='mainMenu']/ul/li[a[normalize-space()='%s']]/div[contains(@class, 'dropdown-menu')]/a[normalize-space()='%s']", header, option));
+			this.clickFast(optionLocator);
+		}
+	}
+	
+	
+	protected void clickFast(final By locator) {
+		assert locator != null;
+
+		WebElement element;
+
+		element = this.locateOne(locator);
+		this.clickFast(element);
+	}
+
+	protected void clickFast(final WebElement element) {
+		assert element != null;
+
+		// INFO: WebElement::click is a nightmare.  Don't use it!
+		this.executor.executeScript("arguments[0].click();", element);		
+		this.sleep(12, false);
+	}
 	
 
+	protected void clickOnSubmitButtonFast(final String label) {
+		assert !StringHelper.isBlank(label);
+
+		By locator;
+
+		locator = By.xpath(String.format("//button[@type='submit' and normalize-space()='%s']", label));
+		this.clickFast(locator);
+	}
 
 }

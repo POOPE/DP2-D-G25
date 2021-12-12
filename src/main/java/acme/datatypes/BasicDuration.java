@@ -74,7 +74,7 @@ public class BasicDuration implements Comparable<BasicDuration>{
 	
 	@Override
 	public String toString() {
-		return this.hours + ":" + this.minutes;
+		return this.hours + ":" + String.format("%02d", this.minutes);
 	}
 
 	/**

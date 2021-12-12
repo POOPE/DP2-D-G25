@@ -104,7 +104,7 @@ public abstract class AbstractTest {
 
 	// Internal state ---------------------------------------------------------
 
-	protected static int			MAX_URL_FETCH_ATTEMPTS	= 10;
+	protected static int			MAX_URL_FETCH_ATTEMPTS	= 3600;
 	protected FirefoxOptions		options;
 	protected WebDriver				driver;
 	protected JavascriptExecutor	executor;

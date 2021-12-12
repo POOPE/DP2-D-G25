@@ -197,6 +197,7 @@
 		<property name="officer" ref="officerOfficer" />
 		<property name="executionStart" value="2021/12/01 08:00" />
 		<property name="executionEnd" value="2021/12/30 17:00" />
+		<property name="duration" value="06:22" />
 		<property name="duties">
 			<list>
 				<ref bean="duty05" />
@@ -210,6 +211,7 @@
 		<property name="officer" ref="officerOfficer" />
 		<property name="executionStart" value="2020/10/01 14:46" />
 		<property name="executionEnd" value="2022/10/02 14:46" />
+		<property name="duration" value="36:32" />
 		<property name="duties">
 			<list>
 				<ref bean="duty04" />
