@@ -11,3 +11,7 @@
 Acme Endeavours is a development based on the Starter Project, which is intended to be a core 
 learning asset for the students who have enroled the Design and Testing subject of the 
 Software Engineering, curriculum of the University of Sevilla. 
+
+Acme Endeavours handles duties and endeavours for users interested in those things.
+
+The git repository can be found here: https://github.com/POOPE/DP2-D-G25
