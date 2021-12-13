@@ -1,0 +1,5 @@
+recordIndex,updatingIndex,executionStart,executionEnd,duties,suggest,removeDuties
+0,0,%,,duty_24,false,duty_22
+1,1,2021/10/30 08:00,,,false,
+2,2,,%,,false,
+3,3,,,,true,

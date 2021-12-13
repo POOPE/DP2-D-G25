@@ -18,14 +18,13 @@ public class OfficerEndeavourDeleteService implements AbstractDeleteService<Offi
 	@Autowired
 	private OfficerEndeavourRepository repo;
 
+	@Autowired
+	private OfficerEndeavourService service;
 	
 	@Override
 	public boolean authorise(final Request<Endeavour> request) {
 		assert request != null;
-		final Integer officerUserAccountId = this.repo.getOne(request.getModel().getInteger("id")).getOfficer().getUserAccount().getId();
-		assert request.getPrincipal().getAccountId() == officerUserAccountId;
-		
-		return true;
+		return this.service.checkPrincipalIsOwner(request.getModel().getInteger("id"));
 	}
 
 	@Override
@@ -71,8 +70,7 @@ public class OfficerEndeavourDeleteService implements AbstractDeleteService<Offi
 		assert request != null;
 		assert entity != null;
 
-		this.repo.delete(entity);
-		
+		this.repo.delete(entity);	
 	}
 
 }

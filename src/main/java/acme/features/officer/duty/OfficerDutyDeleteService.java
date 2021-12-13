@@ -17,15 +17,14 @@ public class OfficerDutyDeleteService implements AbstractDeleteService<Officer, 
 
 	@Autowired
 	private OfficerDutyRepository repo;
-
+	@Autowired
+	private OfficerDutyService			service;
 	
 	@Override
 	public boolean authorise(final Request<Duty> request) {
 		assert request != null;
-		final Integer officerUserAccountId = this.repo.getOne(request.getModel().getInteger("id")).getOfficer().getUserAccount().getId();
-		assert request.getPrincipal().getAccountId() == officerUserAccountId;
 		
-		return true;
+		return this.service.checkPrincipalIsOwner(request.getModel().getInteger("id"));
 	}
 
 	@Override

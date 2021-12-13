@@ -10,6 +10,7 @@ import org.junit.jupiter.api.BeforeAll;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
+import acme.framework.helpers.PerformanceFileHelper;
 import acme.framework.helpers.StringHelper;
 
 public abstract class AcmeEndeavourTest extends AcmeTest {
@@ -18,6 +19,9 @@ public abstract class AcmeEndeavourTest extends AcmeTest {
 	public static int		SHORT_SLEEP		= 9;
 	public static int		LONG_SLEEP		= 20;
 	public static boolean	SKIP_POPULATE	= false;
+	public static boolean	HEADLESS	= false;
+	public static boolean	AUTO_PAUSE	= false;
+	public static int	TIMEOUT	= 19;
 
 
 	@Override
@@ -30,9 +34,9 @@ public abstract class AcmeEndeavourTest extends AcmeTest {
 	}
 	
 	public void setSettings() {
-		super.setAutoPausing(false);
-		super.setDefaultTimeout(14);
-		super.setHeadless(false);
+		super.setAutoPausing(AcmeEndeavourTest.AUTO_PAUSE);
+		super.setDefaultTimeout(AcmeEndeavourTest.TIMEOUT);
+		super.setHeadless(AcmeEndeavourTest.HEADLESS);
 		super.beforeAll();
 
 		super.setBaseCamp("http", "localhost", "8080", "/Acme-Endeavours", "/master/welcome", "?language=en&debug=true");
@@ -209,6 +213,47 @@ public abstract class AcmeEndeavourTest extends AcmeTest {
 
 		locator = By.xpath(String.format("//button[@type='submit' and normalize-space()='%s']", label));
 		this.clickFast(locator);
+	}
+	
+	protected void clickOnListingRecordFast(final int recordIndex) {
+		assert recordIndex >= 0;
+
+		List<WebElement> record;
+		WebElement column;
+
+		record = this.getListingRecord(recordIndex);
+		column = record.get(1);
+		this.clickNavigateFast(column);
+	}
+	
+	protected void clickNavigateFast(final WebElement element) {
+		assert element != null;
+
+		this.navigateFast(() -> this.executor.executeScript("arguments[0].click();", element));
+	}
+	
+	protected void navigateFast(final Runnable navigator) {
+		assert navigator != null;
+
+		By locator;
+		WebElement html;
+		long startTime, endTime, duration;
+		String simplePath;
+
+		locator = By.tagName("html");
+		html = this.driver.findElement(locator);
+		assert html != null;
+
+		startTime = System.currentTimeMillis();
+		navigator.run();
+		this.sleep(12, false);
+		endTime = System.currentTimeMillis();
+		duration = endTime - startTime;
+		simplePath = this.getSimplePath();
+				 
+		PerformanceFileHelper.writeRequestRecord(simplePath, duration);
+
+		this.sleep(21,false);
 	}
 
 }

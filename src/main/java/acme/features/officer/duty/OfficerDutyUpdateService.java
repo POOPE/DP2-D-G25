@@ -1,30 +1,25 @@
 
 package acme.features.officer.duty;
 
-import java.time.LocalDateTime;
 import java.util.Optional;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.util.Assert;
 
 import acme.entities.duties.Duty;
-import acme.entities.endeavours.Endeavour;
 import acme.entities.roles.Officer;
-import acme.features.officer.endeavour.OfficerEndeavourRepository;
 import acme.features.spamfilter.SpamFilterService;
 import acme.framework.components.Errors;
 import acme.framework.components.Model;
 import acme.framework.components.Request;
-import acme.framework.helpers.MessageHelper;
 import acme.framework.services.AbstractUpdateService;
 
 @Service
 public class OfficerDutyUpdateService extends SpamFilterService<Officer, Duty> implements AbstractUpdateService<Officer, Duty> {
 
 	@Autowired
-	private OfficerEndeavourRepository	endeavourRepo;
+	private OfficerDutyService			service;
 
 	@Autowired
 	private OfficerDutyRepository		repo;
@@ -36,7 +31,7 @@ public class OfficerDutyUpdateService extends SpamFilterService<Officer, Duty> i
 	@Override
 	public boolean authorise(final Request<Duty> request) {
 		assert request != null;
-		return true;
+		return this.service.checkPrincipalIsOwner(request.getModel().getInteger("id"));
 	}
 
 	@Override
@@ -79,32 +74,7 @@ public class OfficerDutyUpdateService extends SpamFilterService<Officer, Duty> i
 
 	@Override
 	public void validateAndFilter(final Request<Duty> request, final Duty entity, final Errors errors) {
-		//nothing to do
-		if (Boolean.FALSE.equals(entity.getIsPublic()) && this.endeavourRepo.findAll(Endeavour.withDuty(entity.getId())).stream().anyMatch(e -> e.getIsPublic())) {
-			final String errorMsg = MessageHelper.getMessage("officer.duty.form.error.publicrestriction");
-			errors.add("duties", errorMsg);
-		}
-		
-		try {
-			Assert.isTrue(entity.getExecutionStart().isAfter(LocalDateTime.now()),"Execution start date has to be in the futre");
-		} catch (final Exception e) {
-			final String errorMsg = MessageHelper.getMessage("officer.duty.form.label.error.executionstart.future");
-			errors.add("executionStart", errorMsg);
-		}
-
-		try {
-			Assert.isTrue(entity.getExecutionEnd().isAfter(LocalDateTime.now()),"Execution start date has to be in the futre");
-		} catch (final Exception e) {
-			final String errorMsg = MessageHelper.getMessage("officer.duty.form.label.error.executionend.future");
-			errors.add("executionEnd", errorMsg);
-		}
-
-		try {
-			Assert.isTrue(entity.getExecutionEnd().isAfter(entity.getExecutionStart()),"Execution start after execution end");
-		} catch (final Exception e) {
-			final String errorMsg = MessageHelper.getMessage("officer.duty.form.label.error.execution.inconsistency");
-			errors.add("executionEnd", errorMsg);
-		}
+		this.service.validate(request, entity, errors);
 	}
 
 }

@@ -2,6 +2,7 @@
 package acme.entities.duties;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -153,6 +154,21 @@ public class Duty extends DomainEntity {
 		};
 	}
 
-	
+	public static Specification<Duty> byIdIn(final List<Integer> ids) {
+		return new Specification<Duty>() {
+
+			/**
+			 * 
+			 */
+			private static final long serialVersionUID = -7040689053525813319L;
+
+
+			@Override
+			public Predicate toPredicate(final Root<Duty> root, final CriteriaQuery<?> query, final CriteriaBuilder criteriaBuilder) {
+				return criteriaBuilder.and(root.get("id").in(ids));
+			}
+
+		};
+	}
 
 }

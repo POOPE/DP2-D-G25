@@ -220,5 +220,46 @@
 		</property>
 		<property name="isPublic" value="false" />
 	</bean>
+	
+	<bean id="endeavour03" class="acme.entities.endeavours.Endeavour">
+		<property name="officer" ref="officerOfficer" />
+		<property name="executionStart" value="2020/10/01 11:22" />
+		<property name="executionEnd" value="2022/10/02 22:33" />
+		<property name="duration" value="36:32" />
+		<property name="duties">
+			<list>
+				<ref bean="duty04" />
+			</list>
+		</property>
+		<property name="isPublic" value="false" />
+	</bean>
+	
+	<bean id="endeavour04" class="acme.entities.endeavours.Endeavour">
+		<property name="officer" ref="officerOfficer" />
+		<property name="executionStart" value="2021/12/01 14:00" />
+		<property name="executionEnd" value="2021/12/16 15:30" />
+		<property name="duration" value="6:22" />
+		<property name="duties">
+			<list>
+				<ref bean="duty05" />
+				<ref bean="duty06" />
+			</list>
+		</property>
+		<property name="isPublic" value="false" />
+	</bean>
+	
+	<bean id="endeavour05" class="acme.entities.endeavours.Endeavour">
+		<property name="officer" ref="officerOfficer1" />
+		<property name="executionStart" value="2021/12/02 08:45" />
+		<property name="executionEnd" value="2021/12/15 19:15" />
+		<property name="duration" value="6:22" />
+		<property name="duties">
+			<list>
+				<ref bean="duty05" />
+				<ref bean="duty06" />
+			</list>
+		</property>
+		<property name="isPublic" value="true" />
+	</bean>
 
 </beans>

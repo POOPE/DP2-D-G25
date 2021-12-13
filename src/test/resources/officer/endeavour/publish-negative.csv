@@ -1,0 +1,5 @@
+recordIndex,executionStart,executionEnd,duties,suggest,removeDuties
+0,2020/12/01 08:00,,duty_18,false,,
+1,,2022/12/30 17:00,"duty_19,duty_20",false,,
+2,2021/10/01 22:22,2021/10/02 02:22,duty_21,false,,
+3,,,"duty_20,duty_24,duty_23",true,duty_20,

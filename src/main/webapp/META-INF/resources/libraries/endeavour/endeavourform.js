@@ -84,24 +84,22 @@ function refreshDutiesInput() {
 
 $('#btn-suggest-execperiod').click(function() {
 	var urlStr = getAbsoluteUrl('/officer/endeavour/async/exec-period')
-	if ($('#binded_duties_input').val() == null || $('#binded_duties_input').val() == '') {
-		alert("No duties have been selected");
-	} else {
-		$.ajax({
 
-			url: urlStr,
-			type: 'GET',
-			data: {
-				"dutyIds": $('#binded_duties_input').val(),
-				"dateFormat": $('#date_format').val()
-			},
-			dataType: "json",
-			contentType: "application/json",
-			success: function(data) {
-				$('#executionStart').val(data.executionStart);
-				$('#executionEnd').val(data.executionEnd);
-				return true;
-			}
-		});
-	}
+	$.ajax({
+
+		url: urlStr,
+		type: 'GET',
+		data: {
+			"dutyIds": $('#binded_duties_input').val(),
+			"dateFormat": $('#date_format').val()
+		},
+		dataType: "json",
+		contentType: "application/json",
+		success: function(data) {
+			$('#executionStart').val(data.executionStart);
+			$('#executionEnd').val(data.executionEnd);
+			return true;
+		}
+	});
+
 });
