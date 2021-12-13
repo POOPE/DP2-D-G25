@@ -1,5 +1,5 @@
-recordIndex,executionStart,executionEnd,duties,suggest
-0,2020/10/01 08:00,2021/12/30 17:00,duty_18,false
-1,,,"duty_19,duty_20",true
-2,2020/12/01 08:00,2022/12/30 17:00,"duty_21,duty_22,duty_23",false
-3,,,"duty_24,duty_18,duty_19",true
+recordIndex,executionStart,executionEnd,duties,isPublic,endeavour,workload
+0,2021/12/01 08:00,2021/12/30 17:00,"duty_22,duty_23",true,25,6:22
+1,2020/10/01 14:46,2022/10/02 14:46,"duty_21,duty_20",false,26,36:32
+2,2020/10/01 11:22,2022/10/02 22:33,duty_21,false,27,36:32
+3,2021/12/01 14:00,2021/12/16 15:30,"duty_22,duty_23",false,28,6:22

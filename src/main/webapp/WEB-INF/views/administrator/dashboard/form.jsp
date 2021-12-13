@@ -90,3 +90,107 @@
 	</tr>
 </table>
 
+<table class="table table-sm">
+	<caption></caption>
+	<tr>
+		<th scope="row"><acme:message
+				code="administrator.dashboard.form.label.endeavours.countPublicEndeavours" /></th>
+		<td><jstl:if test="${countPublicEndeavours != null}">
+				<acme:print value="${countPublicEndeavours}" />
+			</jstl:if></td>
+
+	</tr>
+	<tr>
+		<th scope="row"><acme:message
+				code="administrator.dashboard.form.label.endeavours.countPrivateEndeavours" /></th>
+		<td><jstl:if test="${countPrivateEndeavours != null}">
+				<acme:print value="${countPrivateEndeavours}" />
+			</jstl:if></td>
+	</tr>
+</table>
+
+<table class="table table-sm">
+	<caption></caption>
+	<tr>
+		<th scope="row"><acme:message
+				code="administrator.dashboard.form.label.endeavours.countFinishedEndeavours" /></th>
+		<td><jstl:if test="${countFinishedEndeavours != null}">
+				<acme:print value="${countFinishedEndeavours}" />
+			</jstl:if></td>
+
+	</tr>
+	<tr>
+		<th scope="row"><acme:message
+				code="administrator.dashboard.form.label.endeavours.countUnfinishedEndeavours" /></th>
+		<td><jstl:if test="${countUnfinishedEndeavours != null}">
+				<acme:print value="${countUnfinishedEndeavours}" />
+			</jstl:if></td>
+	</tr>
+</table>
+
+<table class="table table-sm">
+	<caption></caption>
+	<tr>
+		<th scope="row"><acme:message
+				code="administrator.dashboard.form.label.endeavours.avgEndeavourExecutionPeriod" /></th>
+		<td><jstl:if test="${avgEndeavourExecutionPeriod != null}">
+				<acme:print value="${avgEndeavourExecutionPeriod}" />
+			</jstl:if></td>
+
+	</tr>
+	<tr>
+		<th scope="row"><acme:message
+				code="administrator.dashboard.form.label.endeavours.stddevEndeavourExecutionPeriod" /></th>
+		<td><jstl:if test="${stddevEndeavourExecutionPeriod != null}">
+				<acme:print value="${stddevEndeavourExecutionPeriod}" />
+			</jstl:if></td>
+	</tr>
+	<tr>
+		<th scope="row"><acme:message
+				code="administrator.dashboard.form.label.endeavours.minEndeavourExecutionPeriod" /></th>
+		<td><jstl:if test="${minEndeavourExecutionPeriod != null}">
+				<acme:print value="${minEndeavourExecutionPeriod}" />
+			</jstl:if></td>
+	</tr>
+	<tr>
+		<th scope="row"><acme:message
+				code="administrator.dashboard.form.label.endeavours.maxEndeavourExecutionPeriod" /></th>
+		<td><jstl:if test="${maxEndeavourExecutionPeriod != null}">
+				<acme:print value="${maxEndeavourExecutionPeriod}" />
+			</jstl:if></td>
+	</tr>
+</table>
+
+<table class="table table-sm">
+	<caption></caption>
+	<tr>
+		<th scope="row"><acme:message
+				code="administrator.dashboard.form.label.endeavours.avgEndeavourWorkload" /></th>
+		<td><jstl:if test="${avgEndeavourWorkload != null}">
+				<acme:print value="${avgEndeavourWorkload}" />
+			</jstl:if></td>
+
+	</tr>
+	<tr>
+		<th scope="row"><acme:message
+				code="administrator.dashboard.form.label.endeavours.stddevEndeavourWorkload" /></th>
+		<td><jstl:if test="${stddevEndeavourWorkload != null}">
+				<acme:print value="${stddevEndeavourWorkload}" />
+			</jstl:if></td>
+	</tr>
+	<tr>
+		<th scope="row"><acme:message
+				code="administrator.dashboard.form.label.endeavours.minEndeavourWorkload" /></th>
+		<td><jstl:if test="${minEndeavourWorkload != null}">
+				<acme:print value="${minEndeavourWorkload}" />
+			</jstl:if></td>
+	</tr>
+	<tr>
+		<th scope="row"><acme:message
+				code="administrator.dashboard.form.label.endeavours.maxEndeavourWorkload" /></th>
+		<td><jstl:if test="${maxEndeavourWorkload != null}">
+				<acme:print value="${maxEndeavourWorkload}" />
+			</jstl:if></td>
+	</tr>
+</table>
+

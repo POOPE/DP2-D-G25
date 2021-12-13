@@ -11,7 +11,6 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvFileSource;
 
-import acme.framework.helpers.MessageHelper;
 import acme.testing.AcmeEndeavourTest;
 
 @Transactional
@@ -23,9 +22,9 @@ public class AnonymousShoutListTest extends AcmeEndeavourTest {
 	public void positiveShoutListing(final int recordIndex, final String moment, final String author, final String text, final String info) {
 		super.clickOnMenu("Shouts", "View shouts");
 
-		final DateTimeFormatter formatter = DateTimeFormatter.ofPattern(MessageHelper.getMessage("default.format.moment"));
+		final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm");
 
-		if (LocalDateTime.parse(text, formatter).isBefore(LocalDateTime.now())) {
+		if (LocalDateTime.parse(moment, formatter).isBefore(LocalDateTime.now())) {
 			super.checkColumnHasValue(recordIndex, 0, moment);
 			super.checkColumnHasValue(recordIndex, 1, author);
 			super.checkColumnHasValue(recordIndex, 2, text);

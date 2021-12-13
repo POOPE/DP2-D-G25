@@ -19,7 +19,7 @@ public class OfficerEndeavourPublishTest extends AcmeEndeavourTest {
 
 	@ParameterizedTest
 	@CsvFileSource(resources = "/officer/endeavour/publish-positive.csv", encoding = "utf-8", numLinesToSkip = 1)
-	@Order(10)
+	@Order(5)
 	public void positivePublish(final int recordIndex, final String executionStart, final String executionEnd, final String duties, final boolean suggest, final String removeDuties) {
 
 		super.signIn("officer", "officer");
@@ -66,7 +66,7 @@ public class OfficerEndeavourPublishTest extends AcmeEndeavourTest {
 
 	@ParameterizedTest
 	@CsvFileSource(resources = "/officer/endeavour/publish-negative.csv", encoding = "utf-8", numLinesToSkip = 1)
-	@Order(20)
+	@Order(6)
 	public void negativePublish(final int recordIndex, final String executionStart, final String executionEnd, final String duties, final boolean suggest, final String removeDuties) {
 
 		super.signIn("officer", "officer");

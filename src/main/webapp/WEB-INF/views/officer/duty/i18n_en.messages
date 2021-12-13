@@ -27,6 +27,7 @@ officer.duty.form.button.create = Create
 officer.duty.form.button.delete = Delete
 
 officer.duty.form.error.publicrestriction = This duty is part of a public endeavour
+officer.duty.form.label.error.associated = Cannot delete a duty that is part of an endeavour
 
 officer.duty.list.label.title = Title
 officer.duty.list.label.description = Description 

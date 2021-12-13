@@ -63,6 +63,8 @@ public class OfficerDutyDeleteService implements AbstractDeleteService<Officer, 
 		assert request != null;
 		assert entity != null;
 		assert errors != null;
+		
+		this.service.validateForDelete(request, entity, errors);
 	}
 
 	@Override

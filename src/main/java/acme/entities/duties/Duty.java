@@ -87,10 +87,10 @@ public class Duty extends DomainEntity {
 			@Override
 			public Predicate toPredicate(final Root<Duty> root, final CriteriaQuery<?> query, final CriteriaBuilder criteriaBuilder) {
 				final LocalDateTime reference = LocalDateTime.now();
-				if (!isExecutionOver) {
-					return criteriaBuilder.greaterThan(root.get("executionEnd"), reference);
-				} else {
+				if (isExecutionOver) {
 					return criteriaBuilder.lessThanOrEqualTo(root.get("executionEnd"), reference);
+				} else {
+					return criteriaBuilder.greaterThan(root.get("executionEnd"), reference);
 				}
 			}
 

@@ -27,6 +27,7 @@ officer.duty.form.button.create = Crear
 officer.duty.form.button.delete = Borrar
 
 officer.duty.form.error.publicrestriction = Este deber forma parte de un esfuerzo publico
+officer.duty.form.label.error.associated = No se puede borrar un deber que es parte de un esfuerzo
  
 authenticated.duty.list.label.title = Titulo
 authenticated.duty.list.label.description = Descripcion 

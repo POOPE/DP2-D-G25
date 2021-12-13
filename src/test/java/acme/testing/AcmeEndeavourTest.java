@@ -19,9 +19,9 @@ public abstract class AcmeEndeavourTest extends AcmeTest {
 	public static int		SHORT_SLEEP		= 9;
 	public static int		LONG_SLEEP		= 20;
 	public static boolean	SKIP_POPULATE	= false;
-	public static boolean	HEADLESS	= false;
+	public static boolean	HEADLESS	= true;
 	public static boolean	AUTO_PAUSE	= false;
-	public static int	TIMEOUT	= 19;
+	public static int	TIMEOUT	= 24;
 
 
 	@Override
@@ -255,5 +255,6 @@ public abstract class AcmeEndeavourTest extends AcmeTest {
 
 		this.sleep(21,false);
 	}
+	
 
 }

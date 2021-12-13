@@ -344,5 +344,30 @@ public abstract class AcmeTest extends AbstractTest {
 
 		return result;
 	}
+	
+	protected String getColumnValue(final int recordIndex, final int attributeIndex) {
+		assert recordIndex >= 0;
+		assert attributeIndex >= 0;
+		// expectedValue is nullable
+
+		List<WebElement> row;
+		WebElement attribute, toggle;
+		String contents;
+		final String value;
+
+		row = this.getListingRecord(recordIndex);
+		assert attributeIndex + 1 < row.size() : String.format("Attribute %d in record %d is out of range", attributeIndex, recordIndex);
+		attribute = row.get(attributeIndex + 1);
+		if (attribute.isDisplayed())
+			contents = attribute.getText();
+		else {
+			toggle = row.get(0);
+			toggle.click();
+			contents = (String) super.executor.executeScript("return arguments[0].innerText;", attribute);
+			toggle.click();
+		}
+
+		return contents;
+	}
 
 }

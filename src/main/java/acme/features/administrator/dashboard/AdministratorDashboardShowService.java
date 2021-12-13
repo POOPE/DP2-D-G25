@@ -12,9 +12,12 @@
 
 package acme.features.administrator.dashboard;
 
+import java.time.LocalDateTime;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import acme.datatypes.BasicDuration;
 import acme.forms.Dashboard;
 import acme.framework.components.Model;
 import acme.framework.components.Request;
@@ -48,7 +51,8 @@ public class AdministratorDashboardShowService implements AbstractShowService<Ad
 		assert model != null;
 
 		request.unbind(entity, model, "countPublicDuties", "countPrivateDuties", "avgDutyExecutionPeriod", "stddevDutyExecutionPeriod", "minDutyExecutionPeriod", "maxDutyExecutionPeriod", "avgDutyWorkload", "stddevDutyWorkload", "minDutyWorkload",
-			"maxDutyWorkload");
+			"maxDutyWorkload", "countPublicEndeavours", "countPrivateEndeavours", "countFinishedEndeavours", "countUnfinishedEndeavours", "avgEndeavourExecutionPeriod", "stddevEndeavourExecutionPeriod", "minEndeavourExecutionPeriod",
+			"maxEndeavourExecutionPeriod", "avgEndeavourWorkload", "stddevEndeavourWorkload", "minEndeavourWorkload", "maxEndeavourWorkload");
 
 	}
 
@@ -70,7 +74,34 @@ public class AdministratorDashboardShowService implements AbstractShowService<Ad
 	}
 
 	private void setEndeavourStats() {
-		//duty execution period
+		//endeavour counts public
+		final Integer countPublicEndeavours = this.repository.countPublicEndeavours();
+		if (countPublicEndeavours != null) {
+			this.dash.setCountPublicEndeavours(String.valueOf(countPublicEndeavours));
+		} else {
+			this.dash.setCountPublicEndeavours("N/A");
+		}
+		final Integer countPrivateEndeavours = this.repository.countPrivateEndeavours();
+		if (countPrivateEndeavours != null) {
+			this.dash.setCountPrivateEndeavours(String.valueOf(countPrivateEndeavours));
+		} else {
+			this.dash.setCountPrivateEndeavours("N/A");
+		}
+		//count endeavour private
+		final Integer countFinishedEndeavours = this.repository.countEndeavoursBeforeDate(LocalDateTime.now());
+		if (countFinishedEndeavours != null) {
+			this.dash.setCountFinishedEndeavours(String.valueOf(countFinishedEndeavours));
+		} else {
+			this.dash.setCountFinishedEndeavours("N/A");
+		}
+		final Integer countUnfinishedEndeavours = this.repository.countEndeavoursAfterDate(LocalDateTime.now());
+		if (countUnfinishedEndeavours != null) {
+			this.dash.setCountUnfinishedEndeavours(String.valueOf(countUnfinishedEndeavours));
+		} else {
+			this.dash.setCountUnfinishedEndeavours("N/A");
+		}
+
+		//endeavour execution period
 		Double avgEndeavourExecutionPeriod = this.repository.avgEndeavourExecutionPeriod();
 		if (avgEndeavourExecutionPeriod != null) {
 			avgEndeavourExecutionPeriod = avgEndeavourExecutionPeriod / (60);
@@ -102,25 +133,29 @@ public class AdministratorDashboardShowService implements AbstractShowService<Ad
 		//endeavour workload
 		final Double avgEndeavourWorkload = this.repository.avgEndeavourWorkload();
 		if (avgEndeavourWorkload != null) {
-			this.dash.setAvgEndeavourWorkload(this.minutesToHoursAndMinutes(avgEndeavourWorkload));
+			final BasicDuration inMinutes = new BasicDuration(null, avgEndeavourWorkload.intValue());
+			this.dash.setAvgEndeavourWorkload(inMinutes.toString());
 		} else {
 			this.dash.setAvgEndeavourWorkload("N/A");
 		}
 		final Double stddevEndeavourWorkload = this.repository.stddevEndeavourWorkload();
 		if (stddevEndeavourWorkload != null) {
-			this.dash.setStddevEndeavourWorkload(this.minutesToHoursAndMinutes(stddevEndeavourWorkload));
+			final BasicDuration inMinutes = new BasicDuration(null, stddevEndeavourWorkload.intValue());
+			this.dash.setStddevEndeavourWorkload(inMinutes.toString());
 		} else {
 			this.dash.setStddevEndeavourWorkload("N/A");
 		}
 		final Double minEndeavourWorkload = this.repository.minEndeavourWorkload();
 		if (minEndeavourWorkload != null) {
-			this.dash.setMinEndeavourWorkload(this.minutesToHoursAndMinutes(minEndeavourWorkload));
+			final BasicDuration inMinutes = new BasicDuration(null, minEndeavourWorkload.intValue());
+			this.dash.setMinEndeavourWorkload(inMinutes.toString());
 		} else {
 			this.dash.setMinEndeavourWorkload("N/A");
 		}
 		final Double maxEndeavourWorkload = this.repository.maxEndeavourWorkload();
 		if (maxEndeavourWorkload != null) {
-			this.dash.setMaxEndeavourWorkload(this.minutesToHoursAndMinutes(maxEndeavourWorkload));
+			final BasicDuration inMinutes = new BasicDuration(null, maxEndeavourWorkload.intValue());
+			this.dash.setMaxEndeavourWorkload(inMinutes.toString());
 		} else {
 			this.dash.setMaxEndeavourWorkload("N/A");
 		}

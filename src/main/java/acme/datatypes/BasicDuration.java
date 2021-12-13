@@ -34,7 +34,7 @@ public class BasicDuration implements Comparable<BasicDuration>{
 	}
 
 	public static BasicDuration of(final Duration duration) {
-		return new BasicDuration(null, Long.valueOf(duration.toMinutes()).intValue());	
+		return new BasicDuration(null, (int) duration.toMinutes());	
 	}
 	
 	/**

@@ -31,26 +31,19 @@ public class AnonymousEndeavourShowTest extends AcmeEndeavourTest{
 
 	}
 
-	/**
-	 * 
-	 * We check that we can't show tasks logged as an administrator.
-	 * Once logged in as administrator, the first thing to do is to check that the anonymous section does not exist. Then we try to access by url
-	 * to the list of tasks, and check that the result is an error page, as it is not authorised.
-	 * 
-	 */
+
 
 	@Test
 	@Order(20)
 	public void negativeTaskShowing() {
-		super.signIn("manager1", "manager1");
-		super.clickOnMenu("Manager", "List my tasks");
+		super.clickOnMenu("Duties", "View duties");
 		super.clickOnListingRecord(0);
 
 		final String url = this.getCurrentUrl();
 		super.signOut();
 
 		super.signIn("administrator", "administrator");
-		super.navigate(url, "");
+		super.navigate(url, null);
 		super.checkPanicExists();
 		this.signOut();
 	}

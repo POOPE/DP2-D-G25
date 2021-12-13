@@ -15,7 +15,7 @@ public class OfficerEndeavourUpdateTest extends AcmeEndeavourTest {
 
 	@ParameterizedTest
 	@CsvFileSource(resources = "/officer/endeavour/update-positive.csv", encoding = "utf-8", numLinesToSkip = 1)
-	@Order(10)
+	@Order(9)
 	public void positiveUpdate(final int recordIndex, final int updatingIndex, final String executionStart, final String executionEnd, final String duties, final boolean suggest, final String removeDuties) {
 
 		super.signIn("officer", "officer");
@@ -79,12 +79,12 @@ public class OfficerEndeavourUpdateTest extends AcmeEndeavourTest {
 
 		if (executionStart!=null && !executionStart.isBlank()) {
 			super.fillInputBoxIn("executionStart", executionStart);
-		}else if(executionStart.equals("%")) {
+		}else if(executionStart!=null && executionStart.equals("%")) {
 			super.fillInputBoxIn("executionStart", "");
 		}
 		if (executionEnd!=null && !executionEnd.isBlank()) {
 			super.fillInputBoxIn("executionEnd", executionEnd);
-		}else if(executionEnd.equals("%")) {
+		}else if(executionEnd!=null && executionEnd.equals("%")) {
 			super.fillInputBoxIn("executionEnd", "");
 		}
 
@@ -116,7 +116,7 @@ public class OfficerEndeavourUpdateTest extends AcmeEndeavourTest {
 		
 
 		super.clickOnSubmitButtonFast("Save");
-		super.checkNotErrorsExist();
+		super.checkErrorsExist();
 
 		super.signOut();
 	}

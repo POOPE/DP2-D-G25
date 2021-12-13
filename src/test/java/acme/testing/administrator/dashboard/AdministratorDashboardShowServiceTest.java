@@ -31,7 +31,7 @@ public class AdministratorDashboardShowServiceTest extends AcmeEndeavourTest {
 	@Test
 	public void positiveAuthorised() {
 		this.signIn("administrator", "administrator");
-		super.navigate("/administrator/dashboard/show", "");
+		super.navigate("/administrator/dashboard/show", null);
 		super.checkNotPanicExists();
 		this.signOut();
 	}
@@ -40,7 +40,7 @@ public class AdministratorDashboardShowServiceTest extends AcmeEndeavourTest {
 	public void positiveNoData() {
 		this.signIn("administrator", "administrator");
 		super.clickOnMenu("Administrator", "Populate DB (initial)");
-		super.navigate("/administrator/dashboard/show", "");
+		super.navigate("/administrator/dashboard/show", null);
 		super.checkNotPanicExists();
 		super.clickOnMenu("Administrator", "Populate DB (samples)");
 		super.checkNotPanicExists();
@@ -49,7 +49,7 @@ public class AdministratorDashboardShowServiceTest extends AcmeEndeavourTest {
 
 	@Test
 	public void negativeUnauthorised() {
-		super.navigate("/administrator/dashboard/show", "");
+		super.navigate("/administrator/dashboard/show", null);
 		super.checkPanicExists();
 	}
 
